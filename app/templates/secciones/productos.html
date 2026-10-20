@@ -1,0 +1,398 @@
+
+{% extends "base.html" %}
+
+{% block title %}Productos | APARC Renace Cañete{% endblock %}
+
+{% block content %}
+
+<!-- HERO DE PRODUCTOS CON FONDO Y OVERLAY -->
+<section class="productos-hero relative min-h-[45vh] flex items-center overflow-hidden bg-renace-900 text-white py-20">
+
+    <div class="absolute inset-0 z-0">
+        <img
+            src="{{ url_for('static', filename='img/productos/productos-hero.jpg') }}"
+            alt="Productos agrícolas Cañete"
+            class="w-full h-full object-cover opacity-35 scale-105"
+        >
+    </div>
+
+    <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-renace-900/70 to-black/50"></div>
+
+    <div class="productos-hero-content relative z-20 max-w-6xl mx-auto px-6 w-full text-center md:text-left">
+        <span 
+            class="productos-label inline-block px-4 py-1.5 mb-4 rounded-full bg-cosecha-500/30 text-cosecha-100 font-bold text-sm tracking-wide border border-cosecha-500/50 backdrop-blur-md" 
+            data-i18n="products.hero.label"
+        >
+            Productos agrícolas
+        </span>
+
+        <h1 
+            class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight drop-shadow-lg"
+            data-i18n="products.hero.title"
+        >
+            Productos que nacen de <span class="text-cosecha-500">nuestra tierra.</span>
+        </h1>
+
+        <p 
+            class="max-w-2xl text-lg md:text-xl text-gray-200 leading-relaxed drop-shadow"
+            data-i18n="products.hero.description"
+        >
+            Conoce nuestra oferta de uva de mesa y sus derivados, con todo el sabor y los nutrientes del valle de Cañete.
+        </p>
+    </div>
+</section>
+
+<!-- INTRODUCCIÓN -->
+<section class="productos-intro py-16 bg-white">
+    <div class="productos-intro-container max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+
+        <div class="productos-intro-title">
+            <span 
+                class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-sm mb-2 block" 
+                data-i18n="products.intro.label"
+            >
+                Nuestra producción
+            </span>
+
+            <h2 
+                class="text-3xl md:text-4xl font-bold text-renace-900 leading-snug"
+                data-i18n="products.intro.title1"
+            >
+                Calidad del campo directo a tu mesa.
+            </h2>
+            <div class="w-20 h-1.5 bg-cosecha-500 rounded-full mt-4"></div>
+        </div>
+
+        <div class="productos-intro-text space-y-4 text-gray-600 leading-relaxed">
+            <p data-i18n="products.intro.text1">
+                En APARC Renace Cañete trabajamos para fortalecer la producción agrícola de nuestros asociados y ofrecer productos de alta calidad al mercado.
+            </p>
+
+            <p data-i18n="products.intro.text2">
+                Nuestras uvas y derivados destacan por su gran valor nutricional, frescura y sabor característico del valle de Cañete.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<!-- CATÁLOGO DE PRODUCTOS -->
+<section class="productos-section py-16 bg-renace-50/50">
+    <div class="productos-container max-w-6xl mx-auto px-4">
+
+        <div class="productos-heading text-center max-w-2xl mx-auto mb-12">
+            <span 
+                class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-sm mb-2 block" 
+                data-i18n="products.catalog.label"
+            >
+                Catálogo
+            </span>
+
+            <h2 
+                class="text-3xl md:text-4xl font-bold text-renace-900 mb-4"
+                data-i18n="products.catalog.title"
+            >
+                Nuestros productos y sus beneficios
+            </h2>
+
+            <p 
+                class="text-gray-600"
+                data-i18n="products.catalog.description"
+            >
+                Información detallada y beneficios nutricionales de nuestra oferta agrícola.
+            </p>
+        </div>
+
+        <div class="productos-grid grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+
+            {% if productos %}
+
+                {% for producto in productos %}
+                <article class="producto-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-renace-100 flex flex-col justify-between hover:-translate-y-1">
+
+                    <div>
+                        <div class="producto-image relative h-64 overflow-hidden bg-gray-100">
+                            {% if producto.imagen %}
+                                <img
+                                    src="{{ url_for('static', filename=producto.imagen) }}"
+                                    alt="{{ producto.nombre }}"
+                                    class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                                >
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center bg-renace-50 text-5xl">
+                                    🍇
+                                </div>
+                            {% endif %}
+
+                            <span class="producto-badge absolute top-4 right-4 bg-cosecha-500 text-white font-bold text-xs uppercase px-3 py-1 rounded-full shadow">
+                                {{ producto.categoria if producto.categoria else 'Fruta Fresca' }}
+                            </span>
+                        </div>
+
+                        <div class="producto-content p-6">
+                            <span class="producto-category text-xs font-bold text-cosecha-600 uppercase tracking-wider block mb-1" data-i18n="products.category">
+                                Producto agrícola
+                            </span>
+
+                            <h3 class="text-2xl font-bold text-renace-900 mb-2">{{ producto.nombre }}</h3>
+
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">{{ producto.descripcion }}</p>
+
+                            <!-- BENEFICIOS DEL PRODUCTO -->
+                            <div class="bg-renace-50/70 p-4 rounded-xl border border-renace-100 mb-6">
+                                <h4 class="text-xs font-extrabold text-renace-900 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                    <span>✨</span> Beneficios clave:
+                                </h4>
+                                <ul class="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
+                                    <li>Alto contenido de antioxidantes naturales.</li>
+                                    <li>Fuente natural de vitaminas y energía saludable.</li>
+                                    <li>Contribuye al bienestar cardiovascular.</li>
+                                </ul>
+                            </div>
+
+                            <div class="producto-info flex items-center justify-between border-t border-gray-100 pt-4 mb-6">
+                                <div>
+                                    <span class="text-xs text-gray-500 block" data-i18n="products.price">Precio</span>
+                                    <strong class="text-xl font-extrabold text-renace-900">
+                                        {% if producto.precio %}S/ {{ '%.2f'|format(producto.precio) }}{% else %}A consultar{% endif %}
+                                    </strong>
+                                </div>
+
+                                <div class="text-right">
+                                    <span class="text-xs text-gray-500 block" data-i18n="products.presentation">Presentación</span>
+                                    <strong class="text-sm font-bold text-renace-800">{{ producto.unidad if producto.unidad else 'Caja / Kg' }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6">
+                        <a
+                            href="{{ url_for('clientes.solicitud') }}?producto={{ producto.id }}"
+                            class="producto-button w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-renace-800 hover:bg-cosecha-500 text-white font-bold transition-colors shadow-md"
+                        >
+                            <span data-i18n="products.request">Solicitar producto</span>
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            {% else %}
+
+                <!-- PRODUCTO 1: UVA ITALIA -->
+                <article class="producto-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-renace-100 flex flex-col justify-between hover:-translate-y-1">
+                    <div>
+                        <div class="producto-image relative h-64 overflow-hidden bg-gray-100">
+                            <img
+                                src="{{ url_for('static', filename='img/productos/uva-italia.jpg') }}"
+                                alt="Uva Italia"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            >
+                            <span class="producto-badge absolute top-4 right-4 bg-cosecha-500 text-white font-bold text-xs uppercase px-3 py-1 rounded-full shadow">
+                                Fruta Fresca
+                            </span>
+                        </div>
+
+                        <div class="producto-content p-6">
+                            <span class="producto-category text-xs font-bold text-cosecha-600 uppercase tracking-wider block mb-1" data-i18n="products.category">
+                                Producto agrícola
+                            </span>
+
+                            <h3 class="text-2xl font-bold text-renace-900 mb-2">Uva Italia</h3>
+
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Uva de mesa de alta calidad, aroma moscatel característico, gran dulzura y excelente textura directamente cosechada en Cañete.
+                            </p>
+
+                            <!-- BENEFICIOS DE LA UVA ITALIA -->
+                            <div class="bg-renace-50/70 p-4 rounded-xl border border-renace-100 mb-6">
+                                <h4 class="text-xs font-extrabold text-renace-900 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                    <span>✨</span> Beneficios de consumir Uva Italia:
+                                </h4>
+                                <ul class="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
+                                    <li><strong>Rica en Antioxidantes:</strong> Contiene resveratrol y flavonoides que combaten el envejecimiento celular.</li>
+                                    <li><strong>Salud Cardiovascular:</strong> Favorece la buena circulación sanguínea y regula la presión arterial.</li>
+                                    <li><strong>Hidratación Natural:</strong> Alto contenido de agua y potasio ideal para la digestión.</li>
+                                </ul>
+                            </div>
+
+                            <div class="producto-info flex items-center justify-between border-t border-gray-100 pt-4 mb-6">
+                                <div>
+                                    <span class="text-xs text-gray-500 block" data-i18n="products.price">Precio</span>
+                                    <strong class="text-xl font-extrabold text-renace-900">A consultar</strong>
+                                </div>
+
+                                <div class="text-right">
+                                    <span class="text-xs text-gray-500 block" data-i18n="products.presentation">Presentación</span>
+                                    <strong class="text-sm font-bold text-renace-800">Caja 10 kg / 20 kg</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6">
+                        <a
+                            href="{{ url_for('clientes.solicitud') }}"
+                            class="producto-button w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-renace-800 hover:bg-cosecha-500 text-white font-bold transition-colors shadow-md"
+                        >
+                            <span data-i18n="products.request">Solicitar producto</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- PRODUCTO 2: PASAS RUBIAS -->
+                <article class="producto-card bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-renace-100 flex flex-col justify-between hover:-translate-y-1">
+                    <div>
+                        <div class="producto-image relative h-64 overflow-hidden bg-gray-100">
+                            <img
+                                src="{{ url_for('static', filename='img/productos/pasas.jpg') }}"
+                                alt="Pasas Rubias"
+                                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                            >
+                            <span class="producto-badge absolute top-4 right-4 bg-cosecha-500 text-white font-bold text-xs uppercase px-3 py-1 rounded-full shadow">
+                                Derivado
+                            </span>
+                        </div>
+
+                        <div class="producto-content p-6">
+                            <span class="producto-category text-xs font-bold text-cosecha-600 uppercase tracking-wider block mb-1" data-i18n="products.category">
+                                Producto agrícola
+                            </span>
+
+                            <h3 class="text-2xl font-bold text-renace-900 mb-2">Pasas Rubias</h3>
+
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Pasas obtenidas mediante procesos de deshidratado natural a partir de uvas seleccionadas, ideales para consumo directo o repostería.
+                            </p>
+
+                            <!-- BENEFICIOS DE LAS PASAS RUBIAS -->
+                            <div class="bg-renace-50/70 p-4 rounded-xl border border-renace-100 mb-6">
+                                <h4 class="text-xs font-extrabold text-renace-900 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                    <span>✨</span> Beneficios de consumir Pasas Rubias:
+                                </h4>
+                                <ul class="text-xs text-gray-700 space-y-1.5 list-disc list-inside">
+                                    <li><strong>Fuente de Energía Rápida:</strong> Carbohidratos naturales ideales para deportistas y estudiantes.</li>
+                                    <li><strong>Salud Digestiva:</strong> Ricas en fibra natural que previene el estreñimiento y mejora el tránsito intestinal.</li>
+                                    <li><strong>Aporte de Hierro y Minerales:</strong> Ayuda a prevenir la anemia y fortalece la salud ósea.</li>
+                                </ul>
+                            </div>
+
+                            <div class="producto-info flex items-center justify-between border-t border-gray-100 pt-4 mb-6">
+                                <div>
+                                    <span class="text-xs text-gray-500 block" data-i18n="products.price">Precio</span>
+                                    <strong class="text-xl font-extrabold text-renace-900">A consultar</strong>
+                                </div>
+
+                                <div class="text-right">
+                                    <span class="text-xs text-gray-500 block" data-i18n="products.presentation">Presentación</span>
+                                    <strong class="text-sm font-bold text-renace-800">Bolsa / Caja 5 kg</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 pb-6">
+                        <a
+                            href="{{ url_for('clientes.solicitud') }}"
+                            class="producto-button w-full inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-renace-800 hover:bg-cosecha-500 text-white font-bold transition-colors shadow-md"
+                        >
+                            <span data-i18n="products.request">Solicitar producto</span>
+                            <span>→</span>
+                        </a>
+                    </div>
+                </article>
+
+            {% endif %}
+
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN DESTACADA: POR QUÉ CONSUMIR PRODUCTOS DE CAÑETE -->
+<section class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-cosecha-600 font-bold uppercase tracking-wider text-sm block mb-2">
+                Nutrición y Sabor
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold text-renace-900">
+                ¿Por qué elegir nuestros productos?
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 text-center">
+            <div class="p-6 rounded-2xl bg-renace-50/60 border border-renace-100 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-cosecha-500 text-white flex items-center justify-center text-2xl mb-4 shadow">
+                    🌱
+                </div>
+                <h3 class="text-lg font-bold text-renace-900 mb-2">100% Natural</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Cultivos cuidados bajo estándares responsables, garantizando frutas frescas sin procesos químicos agresivos.
+                </p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-renace-50/60 border border-renace-100 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-renace-700 text-white flex items-center justify-center text-2xl mb-4 shadow">
+                    💚
+                </div>
+                <h3 class="text-lg font-bold text-renace-900 mb-2">Sabor Único</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    El clima del valle de Cañete otorga un equilibrio perfecto entre dulzura, aroma moscatel y textura.
+                </p>
+            </div>
+
+            <div class="p-6 rounded-2xl bg-renace-50/60 border border-renace-100 shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-14 h-14 mx-auto rounded-2xl bg-cosecha-500 text-white flex items-center justify-center text-2xl mb-4 shadow">
+                    ⚡
+                </div>
+                <h3 class="text-lg font-bold text-renace-900 mb-2">Aporte de Energía</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Uvas frescas y pasas ricas en nutrientes y fibra que te acompañan en tu nutrición diaria.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LLAMADA A LA ACCIÓN (CTA) -->
+<section class="productos-cta bg-renace-900 text-white py-16">
+    <div class="productos-cta-content max-w-4xl mx-auto px-6 text-center">
+
+        <span 
+            class="productos-label inline-block px-4 py-1.5 mb-4 rounded-full bg-cosecha-500/30 text-cosecha-100 font-bold text-sm tracking-wide border border-cosecha-500/50"
+            data-i18n="products.cta.label"
+        >
+            ¿Necesitas nuestros productos?
+        </span>
+
+        <h2 
+            class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight"
+            data-i18n="products.cta.title"
+        >
+            Hagamos crecer <span class="text-cosecha-500">nuevas oportunidades.</span>
+        </h2>
+
+        <p 
+            class="text-gray-200 text-lg mb-8 max-w-2xl mx-auto leading-relaxed"
+            data-i18n="products.cta.description"
+        >
+            Si eres una empresa, asociación o negocio y deseas realizar un pedido comercial, envíanos tu solicitud.
+        </p>
+
+        <a
+            href="{{ url_for('clientes.solicitud') }}"
+            class="cta-button inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-cosecha-500 hover:bg-cosecha-600 text-white font-extrabold text-lg shadow-xl hover:shadow-cosecha-500/50 transition-all duration-300 transform hover:-translate-y-1"
+        >
+            <span data-i18n="products.cta.button">Realizar una solicitud</span>
+            <span>→</span>
+        </a>
+
+    </div>
+</section>
+
+{% endblock %}

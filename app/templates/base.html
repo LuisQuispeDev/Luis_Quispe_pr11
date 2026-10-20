@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}APARC Renace Cañete{% endblock %}
+    </title>
+
+
+    <!-- TAILWIND -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        renace: {
+                            50: "#f0fdf4",
+                            100: "#dcfce7",
+                            200: "#bbf7d0",
+                            300: "#86efac",
+                            400: "#4ade80",
+                            500: "#22c55e",
+                            600: "#16a34a",
+                            700: "#15803d",
+                            800: "#166534",
+                            900: "#14532d"
+                        },
+                        cosecha: {
+                            50: "#fffbeb",
+                            100: "#fef3c7",
+                            500: "#f59e0b",
+                            600: "#d97706",
+                            700: "#b45309"
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
+
+    <!-- CSS DEL PROYECTO -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/main.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/components.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/responsive.css') }}"
+    >
+
+
+    <!-- =========================================
+         CSS PANTALLA DE BIENVENIDA
+    ========================================== -->
+
+    <style>
+
+        /* =========================================
+           MODAL DE CONFIRMACIÓN
+        ========================================== */
+
+        .modal-open {
+            overflow: hidden;
+        }
+
+        .confirm-data-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 999990;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(7px);
+            opacity: 0;
+            visibility: hidden;
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+        }
+
+        .confirm-data-modal-active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .confirm-data-card {
+            width: min(100%, 520px);
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+            transform: translateY(25px) scale(0.96);
+            transition: transform 0.3s ease;
+        }
+
+        .confirm-data-modal-active .confirm-data-card {
+            transform: translateY(0) scale(1);
+        }
+
+        .confirm-data-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dcfce7;
+            color: #15803d;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .confirm-data-card h2 {
+            margin: 0;
+            text-align: center;
+            color: #14532d;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .confirm-data-description {
+            margin: 8px 0 20px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .confirm-data-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .confirm-data-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+        }
+
+        .confirm-data-item strong {
+            color: #166534;
+            font-size: 13px;
+        }
+
+        .confirm-data-item span {
+            color: #374151;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        .confirm-data-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .confirm-edit-button,
+        .confirm-send-button {
+            min-height: 48px;
+            border: 0;
+            border-radius: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.25s ease;
+        }
+
+        .confirm-edit-button {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .confirm-edit-button:hover {
+            background: #e5e7eb;
+        }
+
+        .confirm-send-button {
+            background: #15803d;
+            color: white;
+        }
+
+        .confirm-send-button:hover {
+            background: #166534;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================
+           RESPONSIVE MODAL
+        ========================================== */
+
+        @media (max-width: 600px) {
+
+            .welcome-content {
+                padding: 20px 15px;
+            }
+
+            .welcome-logo {
+                width: 75px;
+                height: 75px;
+            }
+
+            .welcome-leaf {
+                font-size: 34px;
+            }
+
+            .welcome-subtitle {
+                font-size: 11px;
+                letter-spacing: 3px;
+            }
+
+            .welcome-description {
+                font-size: 14px;
+            }
+
+            .confirm-data-card {
+                padding: 22px 18px;
+                border-radius: 20px;
+            }
+
+            .confirm-data-card h2 {
+                font-size: 21px;
+            }
+
+            .confirm-data-actions {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="pt-24">
+
+    <!-- =========================================
+         HEADER MODERNO Y ELEGANTE
+    ========================================== -->
+
+    <header class="site-header fixed top-0 left-0 w-full z-[9999] transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-renace-100/80 shadow-sm" id="main-header">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <!-- LOGO Y MARCA -->
+    <a
+        href="{{ url_for('clientes.inicio') }}"
+        class="flex items-center gap-3 group"
+    >
+        <img
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            alt="Logo APARC Renace Cañete"
+            id="header-logo"
+            class="w-16 h-16 sm:w-20 sm:h-20 object-contain transform group-hover:scale-105 transition-transform duration-300"
+        >
+
+        <div class="flex flex-col">
+            <span class="text-renace-900 font-extrabold text-lg sm:text-xl tracking-wider leading-none">
+                APARC
+            </span>
+            <small class="text-cosecha-600 font-bold text-xs tracking-widest mt-1">
+                RENACE CAÑETE
+            </small>
+        </div>
+    </a>
+
+                <!-- BOTÓN MENÚ MÓVIL -->
+                <button
+                    type="button"
+                    id="menu-toggle"
+                    class="menu-toggle md:hidden flex flex-col justify-center items-center w-10 h-10 rounded-xl bg-renace-50 text-renace-900 focus:outline-none"
+                    aria-label="Abrir menú"
+                    aria-expanded="false"
+                >
+                    <span class="w-6 h-0.5 bg-renace-900 mb-1.5 transition-all"></span>
+                    <span class="w-6 h-0.5 bg-renace-900 mb-1.5 transition-all"></span>
+                    <span class="w-6 h-0.5 bg-renace-900 transition-all"></span>
+                </button>
+
+                <!-- MENÚ PRINCIPAL Y CONTROLES -->
+                <div
+                    id="main-menu"
+                    class="hidden md:flex items-center gap-8"
+                >
+                    <!-- ENLACES DE NAVEGACIÓN -->
+                    <nav class="flex items-center gap-6 font-semibold text-sm text-renace-900">
+                        <a
+                            href="{{ url_for('clientes.inicio') }}"
+                            class="hover:text-cosecha-600 transition-colors py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-cosecha-500 hover:after:w-full after:transition-all"
+                            data-i18n="nav.home"
+                        >
+                            Inicio
+                        </a>
+
+                        <!-- MENÚ DESPLEGABLE: NOSOTROS -->
+                        <div class="relative group py-2">
+                            <button class="flex items-center gap-1 hover:text-cosecha-600 transition-colors focus:outline-none" data-i18n="nav.about">
+                                Nosotros
+                                <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+
+                            <!-- Panel Desplegable -->
+                            <div class="absolute top-full left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 mt-2 w-72 bg-renace-900 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-renace-800 p-2 transform origin-top group-hover:scale-100 scale-95">
+                                <a href="{{ url_for('clientes.nosotros') }}" class="flex items-start gap-4 p-3 rounded-xl hover:bg-renace-800 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-lg bg-cosecha-600/20 text-cosecha-500 flex items-center justify-center flex-shrink-0 group-hover/item:bg-cosecha-500 group-hover/item:text-white transition-colors">
+                                        🌱
+                                    </div>
+                                    <div class="text-left">
+                                        <strong class="block text-white text-sm font-bold mb-0.5">Quiénes somos</strong>
+                                        <span class="block text-gray-400 text-xs">Conoce a nuestra asociación</span>
+                                    </div>
+                                </a>
+
+                                <a href="{{ url_for('clientes.nosotros') }}#proposito" class="flex items-start gap-4 p-3 rounded-xl hover:bg-renace-800 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-lg bg-cosecha-600/20 text-cosecha-500 flex items-center justify-center flex-shrink-0 group-hover/item:bg-cosecha-500 group-hover/item:text-white transition-colors">
+                                        🎯
+                                    </div>
+                                    <div class="text-left">
+                                        <strong class="block text-white text-sm font-bold mb-0.5">Visión y misión</strong>
+                                        <span class="block text-gray-400 text-xs">Hacia dónde vamos y por qué</span>
+                                    </div>
+                                </a>
+
+                                <a href="{{ url_for('clientes.nosotros') }}#trabajo" class="flex items-start gap-4 p-3 rounded-xl hover:bg-renace-800 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-lg bg-cosecha-600/20 text-cosecha-500 flex items-center justify-center flex-shrink-0 group-hover/item:bg-cosecha-500 group-hover/item:text-white transition-colors">
+                                        🤝
+                                    </div>
+                                    <div class="text-left">
+                                        <strong class="block text-white text-sm font-bold mb-0.5">Nuestro trabajo</strong>
+                                        <span class="block text-gray-400 text-xs">Lo que guía nuestro día a día</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <a
+                            href="{{ url_for('clientes.productos') }}"
+                            class="hover:text-cosecha-600 transition-colors py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-cosecha-500 hover:after:w-full after:transition-all"
+                            data-i18n="nav.products"
+                        >
+                            Productos
+                        </a>
+
+                        <a
+                            href="{{ url_for('clientes.contacto') }}"
+                            class="hover:text-cosecha-600 transition-colors py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-cosecha-500 hover:after:w-full after:transition-all"
+                            data-i18n="nav.contact"
+                        >
+                            Contacto
+                        </a>
+
+                        <a
+                            href="{{ url_for('clientes.solicitud') }}"
+                            class="hover:text-cosecha-600 transition-colors py-2 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-cosecha-500 hover:after:w-full after:transition-all"
+                            data-i18n="nav.request"
+                        >
+                            Solicitud
+                        </a>
+                    </nav>
+
+                    <!-- CONTROLES (MODO OSCURO E IDIOMA) -->
+                    <div class="flex items-center gap-3 pl-4 border-l border-gray-200">
+                        <!-- BOTÓN MODO OSCURO -->
+                        <button
+                            type="button"
+                            id="darkModeToggle"
+                            class="dark-mode-toggle flex items-center gap-2 px-3 py-2 rounded-xl bg-renace-900 text-white hover:bg-renace-800 text-xs font-bold transition-all shadow-sm"
+                            aria-label="Activar modo oscuro verde"
+                            aria-pressed="false"
+                        >
+                            <span class="dark-mode-icon" aria-hidden="true">🌙</span>
+                            <span class="hidden lg:inline dark-mode-label">Modo oscuro</span>
+                        </button>
+
+                        <!-- SELECTOR DE IDIOMA -->
+                        <div class="relative">
+                            <button
+                                type="button"
+                                id="languageToggle"
+                                class="language-toggle flex items-center gap-1.5 px-3 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-renace-900 text-xs font-bold transition-all"
+                            >
+                                🌐
+                                <span id="currentLanguage">ES</span>
+                            </button>
+
+                            <div
+                                id="languageMenu"
+                                class="language-menu absolute right-0 mt-2 w-36 bg-white rounded-xl shadow-xl border border-gray-100 py-1 hidden z-50"
+                            >
+                                <button type="button" data-lang="es" class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-renace-50 hover:text-renace-900 font-medium">
+                                    🇵🇪 Español
+                                </button>
+                                <button type="button" data-lang="en" class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-renace-50 hover:text-renace-900 font-medium">
+                                    🇺🇸 English
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+</nav>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTENIDO
+    ========================================== -->
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =========================================
+         CHATBOT
+    ========================================== -->
+
+    <div
+        id="chatbot"
+        class="chatbot"
+    >
+
+        <button
+            type="button"
+            id="chatbot-button"
+            class="chatbot-button"
+            aria-label="Abrir asistente"
+        >
+            💬
+        </button>
+
+
+        <div
+            id="chatbot-window"
+            class="chatbot-window"
+            aria-hidden="true"
+        >
+
+            <div class="chatbot-header">
+
+                <div>
+
+                    <strong>
+                        APARC Assistant
+                    </strong>
+
+                    <span>
+                        ● Online
+                    </span>
+
+                </div>
+
+                <button
+                    type="button"
+                    id="chatbot-close"
+                    aria-label="Cerrar asistente"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <div
+                id="chatbot-messages"
+                class="chatbot-messages"
+            >
+
+                <div class="chatbot-message bot">
+
+                    Hola 👋 Bienvenido a
+                    APARC Renace Cañete.
+
+                    ¿En qué podemos ayudarte?
+
+                </div>
+
+
+                <div class="chatbot-options">
+
+                    <button
+                        type="button"
+                        data-question="products"
+                    >
+                        🍇 Ver productos
+                    </button>
+
+                    <button
+                        type="button"
+                        data-question="contact"
+                    >
+                        📞 Contacto
+                    </button>
+
+                    <button
+                        type="button"
+                        data-question="request"
+                    >
+                        📋 Solicitar productos
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <form
+                id="chatbot-form"
+                class="chatbot-form"
+            >
+
+                <input
+                    type="text"
+                    id="chatbot-input"
+                    placeholder="Escribe tu mensaje..."
+                    autocomplete="off"
+                >
+
+                <button
+                    type="submit"
+                    aria-label="Enviar mensaje"
+                >
+                    ➤
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         MODAL DE VALIDACIÓN
+    ========================================== -->
+
+    <div
+        id="validation-modal"
+        class="validation-modal"
+        data-status="{{ 'success' if enviada else 'error' if error else '' }}"
+        data-message="{{ error or '' }}"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="validation-title"
+        aria-describedby="validation-message"
+        aria-hidden="true"
+    >
+
+        <div
+            class="validation-card"
+            id="validation-card"
+        >
+
+            <button
+                type="button"
+                class="validation-close"
+                id="validation-close"
+                aria-label="Cerrar ventana"
+            >
+                &times;
+            </button>
+
+
+            <div
+                class="validation-icon"
+                id="validation-icon"
+            >
+                ✓
+            </div>
+
+
+            <h2 id="validation-title">
+                ¡Datos enviados!
+            </h2>
+
+
+            <p id="validation-message">
+                Tus datos se enviaron correctamente.
+            </p>
+
+
+            <button
+                type="button"
+                id="validation-button"
+                class="validation-button"
+            >
+                Aceptar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         MODAL ¿TUS DATOS SON CORRECTOS?
+    ========================================== -->
+
+    <div
+        id="confirm-data-modal"
+        class="confirm-data-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="confirm-data-card"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-data-title"
+        >
+
+            <div class="confirm-data-icon">
+                ✓
+            </div>
+
+
+            <h2 id="confirm-data-title">
+                ¿Tus datos son correctos?
+            </h2>
+
+
+            <p class="confirm-data-description">
+                Revisa la información antes de enviarla.
+            </p>
+
+
+            <div
+                id="confirm-data-list"
+                class="confirm-data-list"
+            >
+            </div>
+
+
+            <div class="confirm-data-actions">
+
+                <button
+                    type="button"
+                    id="edit-data-button"
+                    class="confirm-edit-button"
+                >
+                    No, quiero editar
+                </button>
+
+                <button
+                    type="button"
+                    id="send-data-button"
+                    class="confirm-send-button"
+                >
+                    Sí, enviar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT PRINCIPAL
+    ========================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/main.js') }}"
+    ></script>
+
+
+    <!-- =========================================
+         JAVASCRIPT CONFIRMACIÓN DE FORMULARIOS
+    ========================================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const confirmModal =
+                    document.getElementById(
+                        "confirm-data-modal"
+                    );
+
+                const confirmList =
+                    document.getElementById(
+                        "confirm-data-list"
+                    );
+
+                const editButton =
+                    document.getElementById(
+                        "edit-data-button"
+                    );
+
+                const sendButton =
+                    document.getElementById(
+                        "send-data-button"
+                    );
+
+
+                if (
+                    !confirmModal ||
+                    !confirmList ||
+                    !editButton ||
+                    !sendButton
+                ) {
+                    return;
+                }
+
+
+                let currentForm = null;
+
+
+                /* =====================================
+                   OBTENER LABEL
+                ===================================== */
+
+                function getFieldLabel(field) {
+
+                    if (field.id) {
+
+                        const label =
+                            document.querySelector(
+                                `label[for="${field.id}"]`
+                            );
+
+                        if (label) {
+
+                            return label
+                                .textContent
+                                .trim();
+
+                        }
+
+                    }
+
+
+                    if (field.name) {
+
+                        return field.name;
+
+                    }
+
+
+                    return "Dato";
+
+                }
+
+
+                /* =====================================
+                   OBTENER VALOR
+                ===================================== */
+
+                function getFieldValue(field) {
+
+
+                    /* ARCHIVO */
+
+                    if (field.type === "file") {
+
+                        if (field.files.length > 0) {
+
+                            return Array
+                                .from(field.files)
+                                .map(
+                                    file => file.name
+                                )
+                                .join(", ");
+
+                        }
+
+                        return "Sin archivo";
+
+                    }
+
+
+                    /* CHECKBOX / RADIO */
+
+                    if (
+                        field.type === "checkbox" ||
+                        field.type === "radio"
+                    ) {
+
+                        if (!field.checked) {
+
+                            return null;
+
+                        }
+
+                        return field.value ||
+                            "Seleccionado";
+
+                    }
+
+
+                    /* SELECT */
+
+                    if (
+                        field.tagName === "SELECT"
+                    ) {
+
+                        const selected =
+                            field.options[
+                                field.selectedIndex
+                            ];
+
+                        if (selected) {
+
+                            return selected
+                                .textContent
+                                .trim();
+
+                        }
+
+                    }
+
+
+                    return field.value.trim();
+
+                }
+
+
+                /* =====================================
+                   ABRIR MODAL
+                ===================================== */
+
+                function openConfirmModal(form) {
+
+                    currentForm = form;
+
+                    confirmList.innerHTML = "";
+
+
+                    const fields =
+                        form.querySelectorAll(
+                            "input, textarea, select"
+                        );
+
+
+                    let hasData = false;
+
+
+                    fields.forEach(
+                        function (field) {
+
+                            if (
+                                field.type === "submit" ||
+                                field.type === "button" ||
+                                field.type === "hidden"
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            const value =
+                                getFieldValue(field);
+
+
+                            if (
+                                value === null ||
+                                value === ""
+                            ) {
+
+                                return;
+
+                            }
+
+
+                            hasData = true;
+
+
+                            const item =
+                                document.createElement(
+                                    "div"
+                                );
+
+                            item.className =
+                                "confirm-data-item";
+
+
+                            const label =
+                                document.createElement(
+                                    "strong"
+                                );
+
+                            label.textContent =
+                                getFieldLabel(field);
+
+
+                            const content =
+                                document.createElement(
+                                    "span"
+                                );
+
+                            content.textContent =
+                                value;
+
+
+                            item.appendChild(label);
+
+                            item.appendChild(content);
+
+                            confirmList.appendChild(item);
+
+                        }
+                    );
+
+
+                    if (!hasData) {
+
+                        const empty =
+                            document.createElement(
+                                "p"
+                            );
+
+                        empty.textContent =
+                            "No se encontraron datos para mostrar.";
+
+                        confirmList.appendChild(empty);
+
+                    }
+
+
+                    confirmModal.classList.add(
+                        "confirm-data-modal-active"
+                    );
+
+                    confirmModal.setAttribute(
+                        "aria-hidden",
+                        "false"
+                    );
+
+                    document.body.classList.add(
+                        "modal-open"
+                    );
+
+                }
+
+
+                /* =====================================
+                   CERRAR MODAL
+                ===================================== */
+
+                function closeConfirmModal() {
+
+                    confirmModal.classList.remove(
+                        "confirm-data-modal-active"
+                    );
+
+                    confirmModal.setAttribute(
+                        "aria-hidden",
+                        "true"
+                    );
+
+                    document.body.classList.remove(
+                        "modal-open"
+                    );
+
+                }
+
+
+                /* =====================================
+                   INTERCEPTAR FORMULARIOS
+                ===================================== */
+
+                document.addEventListener(
+                    "submit",
+                    function (event) {
+
+                        const form =
+                            event.target;
+
+
+                        /* No intervenir en el chatbot */
+
+                        if (
+                            !form ||
+                            form.id === "chatbot-form"
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        /* Si ya fue confirmado,
+                           dejar que Flask lo reciba */
+
+                        if (
+                            form.dataset.confirmed ===
+                            "true"
+                        ) {
+
+                            delete form.dataset.confirmed;
+
+                            return;
+
+                        }
+
+
+                        event.preventDefault();
+
+                        openConfirmModal(form);
+
+                    },
+                    true
+                );
+
+
+                /* =====================================
+                   BOTÓN EDITAR
+                ===================================== */
+
+                editButton.addEventListener(
+                    "click",
+                    function () {
+
+                        closeConfirmModal();
+
+
+                        if (!currentForm) {
+                            return;
+                        }
+
+
+                        const firstField =
+                            currentForm.querySelector(
+                                "input:not([type='hidden']), textarea, select"
+                            );
+
+
+                        if (firstField) {
+
+                            setTimeout(
+                                function () {
+
+                                    firstField.focus();
+
+                                },
+                                150
+                            );
+
+                        }
+
+                    }
+                );
+
+
+                /* =====================================
+                   BOTÓN ENVIAR
+                ===================================== */
+
+                sendButton.addEventListener(
+                    "click",
+                    function () {
+
+                        if (!currentForm) {
+                            return;
+                        }
+
+
+                        currentForm.dataset.confirmed =
+                            "true";
+
+
+                        closeConfirmModal();
+
+
+                        setTimeout(
+                            function () {
+
+                                if (
+                                    typeof currentForm
+                                        .requestSubmit ===
+                                    "function"
+                                ) {
+
+                                    currentForm.requestSubmit();
+
+                                } else {
+
+                                    currentForm.submit();
+
+                                }
+
+                            },
+                            100
+                        );
+
+                    }
+                );
+
+
+                /* =====================================
+                   CERRAR HACIENDO CLIC AFUERA
+                ===================================== */
+
+                confirmModal.addEventListener(
+                    "click",
+                    function (event) {
+
+                        if (
+                            event.target ===
+                            confirmModal
+                        ) {
+
+                            closeConfirmModal();
+
+                        }
+
+                    }
+                );
+
+
+                /* =====================================
+                   CERRAR CON ESC
+                ===================================== */
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (
+                            event.key === "Escape" &&
+                            confirmModal.getAttribute(
+                                "aria-hidden"
+                            ) === "false"
+                        ) {
+
+                            closeConfirmModal();
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1320 @@
+/* configuración General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #111111;
+    background: #ffffff;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* Animaciones */
+.reveal {
+    opacity: 0;
+    transform: translateY(25px);
+    animation: revealUp 0.8s ease forwards;
+}
+
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes imageZoom {
+    from {
+        transform: scale(1.03);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+/* =========================================
+   ANIMACIONES GENERALES
+========================================= */
+
+.nosotros-animate {
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.nosotros-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nosotros-delay-1 {
+    transition-delay: 0.15s;
+}
+
+.nosotros-delay-2 {
+    transition-delay: 0.3s;
+}
+
+.nosotros-delay-3 {
+    transition-delay: 0.45s;
+}
+
+
+/* Animación del Hero */
+
+.nosotros-container {
+    animation: nosotrosHero 1s ease forwards;
+}
+
+@keyframes nosotrosHero {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Movimiento suave del fondo */
+
+.nosotros-hero {
+    background-attachment: scroll;
+}
+
+@media (min-width: 901px) {
+
+    .nosotros-hero {
+        background-attachment: fixed;
+    }
+
+}
+
+/* =========================================
+   ANIMACIONES PRODUCTOS
+========================================= */
+
+.productos-animate {
+    opacity: 0;
+
+    transform: translateY(35px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.productos-animate.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.productos-delay-1 {
+    transition-delay: 0.18s;
+}
+
+.productos-delay-2 {
+    transition-delay: 0.36s;
+}
+
+@keyframes productosHero {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =========================================
+   VENTANA FLOTANTE DE VALIDACIÓN
+========================================= */
+
+.validation-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(5px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+.validation-modal.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.validation-card {
+    position: relative;
+
+    width: 100%;
+    max-width: 420px;
+
+    padding: 38px 28px 30px;
+
+    text-align: center;
+
+    background: #ffffff;
+    border-radius: 22px;
+
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+
+    transform: translateY(20px) scale(0.96);
+
+    transition: transform 0.25s ease;
+}
+
+.validation-modal.active .validation-card {
+    transform: translateY(0) scale(1);
+}
+
+.validation-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+
+    width: 36px;
+    height: 36px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f3f4f6;
+    color: #374151;
+
+    font-size: 26px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.validation-close:hover {
+    background: #e5e7eb;
+}
+
+.validation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #dcfce7;
+    color: #15803d;
+
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.validation-card h2 {
+    margin-bottom: 12px;
+
+    color: #166534;
+
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.validation-card p {
+    margin-bottom: 25px;
+
+    color: #4b5563;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    overflow-wrap: anywhere;
+}
+
+.validation-button {
+    width: 100%;
+
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #15803d;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.validation-button:hover {
+    background: #166534;
+    transform: translateY(-2px);
+}
+
+/* ESTADO DE ERROR */
+
+.validation-card.error .validation-icon {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.validation-card.error h2 {
+    color: #b91c1c;
+}
+
+.validation-card.error .validation-button {
+    background: #b91c1c;
+}
+
+.validation-card.error .validation-button:hover {
+    background: #991b1b;
+}
+
+/* ESTADO DE ADVERTENCIA */
+
+.validation-card.warning .validation-icon {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.validation-card.warning h2 {
+    color: #92400e;
+}
+
+.validation-card.warning .validation-button {
+    background: #92400e;
+}
+
+/* ESTADO DE CARGA */
+
+.validation-card.loading .validation-icon {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.validation-card.loading h2 {
+    color: #1d4ed8;
+}
+
+.validation-card.loading .validation-button {
+    display: none;
+}
+
+@media (max-width: 480px) {
+    .validation-card {
+        padding: 35px 22px 24px;
+        border-radius: 18px;
+    }
+
+    .validation-card h2 {
+        font-size: 22px;
+    }
+
+    .validation-card p {
+        font-size: 14px;
+    }
+}
+
+/* =====================================
+   VENTANA DE CONFIRMACIÓN DE DATOS
+===================================== */
+
+.confirm-data-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(5px);
+}
+
+.confirm-data-modal.active {
+    display: flex;
+}
+
+.confirm-data-card {
+    width: 100%;
+    max-width: 520px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+    animation: confirmDataAppear 0.25s ease;
+}
+
+@keyframes confirmDataAppear {
+    from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.confirm-data-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.confirm-data-card h2 {
+    margin: 0 0 10px;
+    color: #166534;
+    font-size: 24px;
+    text-align: center;
+}
+
+.confirm-data-description {
+    margin-bottom: 22px;
+    color: #64748b;
+    font-size: 14px;
+    text-align: center;
+}
+
+.confirm-data-list {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.confirm-data-item {
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #f8fafc;
+    overflow-wrap: anywhere;
+}
+
+.confirm-data-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.confirm-data-value {
+    color: #1e293b;
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+.confirm-data-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.confirm-data-actions button {
+    flex: 1;
+    min-height: 46px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.confirm-data-actions button:hover {
+    transform: translateY(-2px);
+}
+
+.confirm-edit-button {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.confirm-edit-button:hover {
+    background: #cbd5e1;
+}
+
+.confirm-send-button {
+    background: #15803d;
+    color: #fff;
+}
+
+.confirm-send-button:hover {
+    background: #166534;
+}
+
+@media (max-width: 480px) {
+    .confirm-data-card {
+        padding: 22px 18px;
+    }
+
+    .confirm-data-card h2 {
+        font-size: 21px;
+    }
+
+    .confirm-data-actions {
+        flex-direction: column;
+    }
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.logo-img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+/* Transición suave para el menú pegajoso y compacto */
+.site-header {
+    transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header img {
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+
+/* ==========================================
+   MODO OSCURO VERDE - APARC RENACE CAÑETE
+   Las imágenes permanecen originales
+========================================== */
+
+:root {
+    --dark-green-bg: #062e1b;
+    --dark-green-surface: #0a3b24;
+    --dark-green-card: #0d472b;
+    --dark-green-border: #286344;
+    --dark-green-text: #ffffff;
+    --dark-green-accent: #9be7b2;
+}
+
+/* Botón del modo oscuro */
+.dark-mode-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 12px;
+    margin-left: 10px;
+    border: 1px solid #3f8a5b;
+    border-radius: 999px;
+    color: #fff;
+    background: #0a3b24;
+    font: inherit;
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.dark-mode-toggle:hover {
+    background: #14532d;
+    transform: translateY(-1px);
+}
+
+/* Fondo general */
+body.dark-mode {
+    color: #fff !important;
+    background-color: var(--dark-green-bg) !important;
+}
+
+/* Secciones principales */
+body.dark-mode main,
+body.dark-mode section,
+body.dark-mode .site-header,
+body.dark-mode .historia-section,
+body.dark-mode .guia-section,
+body.dark-mode .valores-section,
+body.dark-mode .trabajo-section,
+body.dark-mode .nosotros-section,
+body.dark-mode .productos-section,
+body.dark-mode .contacto-section,
+body.dark-mode .solicitud-section,
+body.dark-mode .product-section,
+body.dark-mode .contact-section,
+body.dark-mode .request-section,
+body.dark-mode .guia-card,
+body.dark-mode .valor-card,
+body.dark-mode .producto-card,
+body.dark-mode .product-card,
+body.dark-mode .contact-info-card,
+body.dark-mode .contact-form-card,
+body.dark-mode .form-card,
+body.dark-mode .map-section,
+body.dark-mode .map-container,
+body.dark-mode .location-section,
+body.dark-mode .faq-item,
+body.dark-mode .testimonial-card,
+body.dark-mode .staff-card,
+body.dark-mode .info-card,
+body.dark-mode .feature-card {
+    background-color: var(--dark-green-surface) !important;
+    color: #fff !important;
+    border-color: var(--dark-green-border) !important;
+}
+
+/* Tarjetas en verde oscuro */
+body.dark-mode .guia-card,
+body.dark-mode .valor-card,
+body.dark-mode .producto-card,
+body.dark-mode .product-card,
+body.dark-mode .contact-info-card,
+body.dark-mode .contact-form-card,
+body.dark-mode .form-card,
+body.dark-mode .faq-item,
+body.dark-mode .testimonial-card,
+body.dark-mode .staff-card,
+body.dark-mode .info-card,
+body.dark-mode .feature-card {
+    background-color: var(--dark-green-card) !important;
+}
+
+/* Letras blancas */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode li,
+body.dark-mode label,
+body.dark-mode small,
+body.dark-mode strong,
+body.dark-mode .logo-sub,
+body.dark-mode .main-menu a,
+body.dark-mode .inicio-description,
+body.dark-mode .historia-content p:not(.section-label),
+body.dark-mode .guia-description,
+body.dark-mode .guia-card p,
+body.dark-mode .valor-card p,
+body.dark-mode .section-label,
+body.dark-mode .inicio-label {
+    color: #fff !important;
+}
+
+/* Enlaces y detalles */
+body.dark-mode a:not(.inicio-button) {
+    color: var(--dark-green-accent);
+}
+
+body.dark-mode .logo-main,
+body.dark-mode .inicio-container h1 span {
+    color: var(--dark-green-accent) !important;
+}
+
+/* Formularios, chatbot y menús */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode .form-control,
+body.dark-mode .language-menu,
+body.dark-mode .chatbot-window,
+body.dark-mode .chatbot-body,
+body.dark-mode .chatbot-messages,
+body.dark-mode .chatbot-input,
+body.dark-mode .confirm-data-card {
+    background-color: var(--dark-green-card) !important;
+    color: #fff !important;
+    border-color: var(--dark-green-border) !important;
+}
+
+/* Texto de ayuda de los formularios */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #c6dfcf !important;
+    opacity: 1;
+}
+
+body.dark-mode option {
+    background: var(--dark-green-card);
+    color: #fff;
+}
+
+body.dark-mode .language-menu button {
+    color: #fff !important;
+    background: transparent !important;
+}
+
+/* Inicio: oscurecer la capa de fondo sin modificar la foto */
+body.dark-mode .inicio-hero {
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(4, 35, 19, .94),
+            rgba(4, 35, 19, .82) 45%,
+            rgba(4, 35, 19, .38)
+        ),
+        url("../img/hero/hero-principal.jpg") !important;
+}
+
+/* Nosotros: mantener la fotografía original */
+body.dark-mode .nosotros-hero {
+    background-image:
+        linear-gradient(
+            100deg,
+            rgba(4, 35, 19, .96),
+            rgba(5, 55, 28, .82),
+            rgba(5, 55, 28, .38)
+        ),
+        url("../img/nosotros-hero.jpg") !important;
+}
+
+/* No aplicar filtros a imágenes ni contenido multimedia */
+body.dark-mode img,
+body.dark-mode picture,
+body.dark-mode video,
+body.dark-mode iframe,
+body.dark-mode .carousel-image {
+    filter: none !important;
+}
+
+/* Carruseles */
+body.dark-mode .carousel-button {
+    color: #fff !important;
+    background: #0d472b !important;
+}
+
+/* Efectos al pasar el cursor */
+body.dark-mode .valor-card:hover,
+body.dark-mode .guia-card:hover {
+    background-color: #14532d !important;
+}
+
+/* Pie de página */
+body.dark-mode .inicio-footer {
+    background-color: #031f12 !important;
+}
+
+body.dark-mode .footer-content p,
+body.dark-mode .footer-bottom {
+    color: #fff !important;
+}
+
+/* Adaptación a móviles */
+@media (max-width: 900px) {
+    .dark-mode-toggle {
+        margin: 12px 0;
+        align-self: flex-start;
+    }
+}
+
+body.dark-mode {
+    background: #062e1b !important;
+    color: #ffffff !important;
+}
+
+/* 1. PROPÓSITO: tarjetas y textos legibles */
+body.dark-mode .guia-section,
+body.dark-mode .valores-section,
+body.dark-mode .proposito-section,
+body.dark-mode .principios-section {
+    background: #062e1b !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .guia-card,
+body.dark-mode .valor-card,
+body.dark-mode .proposito-card,
+body.dark-mode .principio-card {
+    background: #0b3d26 !important;
+    color: #ffffff !important;
+    border-color: #245b3c !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .15) !important;
+}
+
+body.dark-mode .guia-card h3,
+body.dark-mode .guia-card p,
+body.dark-mode .valor-card h3,
+body.dark-mode .valor-card p,
+body.dark-mode .proposito-card h3,
+body.dark-mode .proposito-card p,
+body.dark-mode .principio-card h3,
+body.dark-mode .principio-card p {
+    color: #ffffff !important;
+}
+
+/* 2. EVITAR TEXTO BLANCO SOBRE FONDO CLARO */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode label,
+body.dark-mode li,
+body.dark-mode strong,
+body.dark-mode small {
+    color: #ffffff !important;
+}
+
+/* Las etiquetas decorativas conservan contraste */
+body.dark-mode .section-label,
+body.dark-mode .inicio-label {
+    color: #b7f7c9 !important;
+}
+
+/* Corregir la selección azul del navegador */
+body.dark-mode ::selection {
+    background: #a7f3b8 !important;
+    color: #062e1b !important;
+}
+
+/* 3. CONTACTO: fondo general y tarjetas */
+body.dark-mode .contacto-section,
+body.dark-mode .contact-section,
+body.dark-mode .contacto-container,
+body.dark-mode .contacto-content,
+body.dark-mode .contacto-info,
+body.dark-mode .contact-info {
+    background-color: #062e1b !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .contact-info-card,
+body.dark-mode .contact-form-card,
+body.dark-mode .contacto-card,
+body.dark-mode .contact-card,
+body.dark-mode .contact-form {
+    background: #0b3d26 !important;
+    color: #ffffff !important;
+    border-color: #245b3c !important;
+}
+
+body.dark-mode .contact-info-card *,
+body.dark-mode .contact-form-card *,
+body.dark-mode .contacto-card *,
+body.dark-mode .contact-card *,
+body.dark-mode .contact-form * {
+    color: #ffffff !important;
+}
+
+/* 4. SOLICITUD DE PRODUCTOS: toda la sección verde */
+body.dark-mode .solicitud-section,
+body.dark-mode .solicitud-container,
+body.dark-mode .solicitud-content,
+body.dark-mode .request-section,
+body.dark-mode .request-container,
+body.dark-mode .product-request-section {
+    background: #062e1b !important;
+    color: #ffffff !important;
+}
+
+/* Formulario completamente verde oscuro */
+body.dark-mode .solicitud-form,
+body.dark-mode .solicitud-form-container,
+body.dark-mode .request-form,
+body.dark-mode .product-request-form,
+body.dark-mode .formulario-solicitud,
+body.dark-mode .form-card {
+    background: #0b3d26 !important;
+    color: #ffffff !important;
+    border: 1px solid #245b3c !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .18) !important;
+}
+
+/* Campos del formulario */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea,
+body.dark-mode .solicitud-form input,
+body.dark-mode .solicitud-form select,
+body.dark-mode .solicitud-form textarea,
+body.dark-mode .request-form input,
+body.dark-mode .request-form select,
+body.dark-mode .request-form textarea {
+    background: #104b30 !important;
+    color: #ffffff !important;
+    border: 1px solid #387653 !important;
+    caret-color: #ffffff !important;
+}
+
+/* Texto de ayuda dentro de los campos */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #d1e7d8 !important;
+    opacity: 1 !important;
+}
+
+/* Opciones de las listas desplegables */
+body.dark-mode select option {
+    background: #104b30 !important;
+    color: #ffffff !important;
+}
+
+/* Botones de envío */
+body.dark-mode .solicitud-form button,
+body.dark-mode .request-form button,
+body.dark-mode .contact-form button,
+body.dark-mode .contact-form-card button {
+    background: #176638 !important;
+    color: #ffffff !important;
+    border-color: #398b59 !important;
+}
+
+body.dark-mode .solicitud-form button:hover,
+body.dark-mode .request-form button:hover,
+body.dark-mode .contact-form button:hover {
+    background: #21834b !important;
+}
+
+/* Mantener imágenes originales */
+body.dark-mode img,
+body.dark-mode picture img {
+    filter: none !important;
+}
+
+/* Fondo general de todas las páginas en modo oscuro */
+body.dark-mode {
+    background-color: #062e1b !important;
+}
+
+/* ------------------------------------------
+   1. CONTACTO: quitar el marco blanco
+------------------------------------------ */
+
+body.dark-mode .contacto-section,
+body.dark-mode .contact-section,
+body.dark-mode .contacto-container,
+body.dark-mode .contacto-content,
+body.dark-mode .contacto-wrapper,
+body.dark-mode .contacto-layout,
+body.dark-mode .contact-form-wrapper,
+body.dark-mode .contact-form-card,
+body.dark-mode .contact-form-container,
+body.dark-mode .contact-form,
+body.dark-mode .contact-info,
+body.dark-mode .contact-info-card {
+    background-color: #062e1b !important;
+    color: #ffffff !important;
+    border-color: #174d32 !important;
+}
+
+/* Tarjetas de información */
+body.dark-mode .contact-info-card {
+    background-color: #0b3d26 !important;
+}
+
+/* Formulario de contacto */
+body.dark-mode .contact-form-card,
+body.dark-mode .contact-form-container,
+body.dark-mode .contact-form {
+    background-color: #0b3d26 !important;
+    box-shadow: none !important;
+}
+
+/* ------------------------------------------
+   2. SOLICITUD: quitar el marco blanco
+------------------------------------------ */
+
+body.dark-mode .solicitud-section,
+body.dark-mode .solicitud-container,
+body.dark-mode .solicitud-content,
+body.dark-mode .solicitud-wrapper,
+body.dark-mode .solicitud-layout,
+body.dark-mode .request-section,
+body.dark-mode .request-container,
+body.dark-mode .request-wrapper,
+body.dark-mode .product-request-section,
+body.dark-mode .product-request-container {
+    background-color: #062e1b !important;
+    color: #ffffff !important;
+    border-color: #174d32 !important;
+}
+
+/* Contenedores del formulario */
+body.dark-mode .solicitud-form,
+body.dark-mode .solicitud-form-container,
+body.dark-mode .formulario-solicitud,
+body.dark-mode .request-form,
+body.dark-mode .product-request-form,
+body.dark-mode .solicitud-card,
+body.dark-mode .request-card {
+    background-color: #0b3d26 !important;
+    color: #ffffff !important;
+    border-color: #245b3c !important;
+    box-shadow: none !important;
+}
+
+/* ------------------------------------------
+   3. PRODUCTOS: eliminar el fondo blanco
+------------------------------------------ */
+
+body.dark-mode .productos-section,
+body.dark-mode .product-section,
+body.dark-mode .productos-container,
+body.dark-mode .productos-hero,
+body.dark-mode .productos-header,
+body.dark-mode .catalogo-section,
+body.dark-mode .catalogo-container,
+body.dark-mode .catalog-section,
+body.dark-mode .catalog-container,
+body.dark-mode .products-hero,
+body.dark-mode .products-header,
+body.dark-mode .productos-intro,
+body.dark-mode .catalog-intro {
+    background-color: #062e1b !important;
+    color: #ffffff !important;
+}
+
+/* Secciones de catálogo y productos */
+body.dark-mode .productos-section *,
+body.dark-mode .product-section *,
+body.dark-mode .productos-hero *,
+body.dark-mode .productos-header *,
+body.dark-mode .catalogo-section *,
+body.dark-mode .catalog-section *,
+body.dark-mode .products-hero *,
+body.dark-mode .products-header * {
+    border-color: #174d32;
+}
+
+/* Mantener textos legibles */
+body.dark-mode .productos-section h1,
+body.dark-mode .productos-section h2,
+body.dark-mode .productos-section h3,
+body.dark-mode .productos-section p,
+body.dark-mode .product-section h1,
+body.dark-mode .product-section h2,
+body.dark-mode .product-section p,
+body.dark-mode .productos-hero h1,
+body.dark-mode .productos-hero p,
+body.dark-mode .catalogo-section h1,
+body.dark-mode .catalogo-section p {
+    color: #ffffff !important;
+}
+
+/* ------------------------------------------
+   4. FORMULARIOS: campos verde oscuro
+------------------------------------------ */
+
+body.dark-mode form input,
+body.dark-mode form select,
+body.dark-mode form textarea {
+    background-color: #104b30 !important;
+    color: #ffffff !important;
+    border-color: #387653 !important;
+}
+
+body.dark-mode form input::placeholder,
+body.dark-mode form textarea::placeholder {
+    color: #d1e7d8 !important;
+    opacity: 1 !important;
+}
+
+/* ------------------------------------------
+   5. MANTENER LAS IMÁGENES ORIGINALES
+------------------------------------------ */
+
+body.dark-mode img {
+    filter: none !important;
+}
+
+/* CONTACTO: fondo general */
+body.dark-mode .contacto-hero,
+body.dark-mode .contacto-section,
+body.dark-mode .contacto-cta {
+    background-color: #062e1b !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+/* CONTACTO: eliminar tarjeta blanca del formulario */
+body.dark-mode .contacto-form-wrapper {
+    background: #0b3d26 !important;
+    background-color: #0b3d26 !important;
+    border: 1px solid #245b3c !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .contacto-form-header h2,
+body.dark-mode .contacto-form-header p,
+body.dark-mode .contacto-form-header .section-label,
+body.dark-mode .contacto-form label {
+    color: #ffffff !important;
+}
+
+/* SOLICITUD: eliminar tarjeta blanca del formulario */
+body.dark-mode .solicitud-hero,
+body.dark-mode .solicitud-section,
+body.dark-mode .solicitud-bottom {
+    background-color: #062e1b !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .solicitud-form-wrapper {
+    background: #0b3d26 !important;
+    background-color: #0b3d26 !important;
+    border: 1px solid #245b3c !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .form-header h2,
+body.dark-mode .form-header p,
+body.dark-mode .form-header > span,
+body.dark-mode .solicitud-form label,
+body.dark-mode .solicitud-info p {
+    color: #ffffff !important;
+}
+
+/* Tarjetas de beneficios de solicitud */
+body.dark-mode .beneficio-card {
+    background: #0b3d26 !important;
+    border: 1px solid #245b3c !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .beneficio-card p,
+body.dark-mode .beneficio-card strong {
+    color: #ffffff !important;
+}
+
+/* PRODUCTOS: quitar el degradado blanco */
+body.dark-mode .productos-hero,
+body.dark-mode .productos-intro,
+body.dark-mode .productos-intro-container,
+body.dark-mode .productos-section {
+    background-color: #062e1b !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+/* Mantener el fondo de la portada de productos verde oscuro */
+body.dark-mode .productos-hero {
+    background-image:
+        linear-gradient(
+            135deg,
+            #062e1b 0%,
+            #0b3d26 60%,
+            #104b30 100%
+        ) !important;
+}
+
+/* Títulos y descripciones de productos */
+body.dark-mode .productos-intro-title,
+body.dark-mode .productos-intro-text,
+body.dark-mode .productos-heading h2,
+body.dark-mode .productos-heading p,
+body.dark-mode .productos-label {
+    color: #ffffff !important;
+}
+
+/* Tarjetas del catálogo */
+body.dark-mode .producto-card {
+    background: #0b3d26 !important;
+    border: 1px solid #245b3c !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+body.dark-mode .producto-content,
+body.dark-mode .producto-info,
+body.dark-mode .producto-category,
+body.dark-mode .producto-content h3,
+body.dark-mode .producto-content p {
+    background-color: #0b3d26 !important;
+    color: #ffffff !important;
+}
+
+/* Llamada final de productos */
+body.dark-mode .productos-cta {
+    background: linear-gradient(
+        135deg,
+        #062e1b,
+        #104b30
+    ) !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .productos-cta h2,
+body.dark-mode .productos-cta p,
+body.dark-mode .productos-cta .productos-label {
+    color: #ffffff !important;
+}
+
+/* Campos de ambos formularios */
+body.dark-mode .contacto-form input,
+body.dark-mode .contacto-form select,
+body.dark-mode .contacto-form textarea,
+body.dark-mode .solicitud-form input,
+body.dark-mode .solicitud-form select,
+body.dark-mode .solicitud-form textarea {
+    background-color: #104b30 !important;
+    color: #ffffff !important;
+    border-color: #387653 !important;
+}
+
+/* No oscurecer las fotografías */
+body.dark-mode .producto-image img,
+body.dark-mode .productos-hero img {
+    filter: none !important;
+}
+
+/* 1. Quitar el fondo blanco del botón o contenedor superior */
+body.dark-mode .solicitud-hero button,
+body.dark-mode .solicitud-hero a,
+body.dark-mode .solicitud-bottom button,
+body.dark-mode .solicitud-bottom a,
+body.dark-mode .solicitud-cta button,
+body.dark-mode .solicitud-cta a {
+    background-color: #0b3d26 !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border: 1px solid #245b3c !important;
+    box-shadow: none !important;
+}
+
+/* También corregir contenedores vacíos blancos */
+body.dark-mode .solicitud-hero .btn,
+body.dark-mode .solicitud-bottom .btn,
+body.dark-mode .solicitud-cta .btn {
+    background: #0b3d26 !important;
+    color: #ffffff !important;
+}
+
+/* 2. Eliminar la raya interior del formulario */
+body.dark-mode .solicitud-form-wrapper form,
+body.dark-mode .solicitud-form-wrapper .solicitud-form,
+body.dark-mode .solicitud-form-wrapper .form-grid,
+body.dark-mode .solicitud-form-wrapper .form-row {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Quitar bordes de contenedores internos,
+   conservando los bordes de los campos */
+body.dark-mode .solicitud-form-wrapper form,
+body.dark-mode .solicitud-form-wrapper .form-grid,
+body.dark-mode .solicitud-form-wrapper .form-row,
+body.dark-mode .solicitud-form-wrapper .form-group {
+    border: none !important;
+}
+
+/* Mantener los campos con su propio borde */
+body.dark-mode .solicitud-form-wrapper input,
+body.dark-mode .solicitud-form-wrapper select,
+body.dark-mode .solicitud-form-wrapper textarea {
+    border: 1px solid #387653 !important;
+    background-color: #104b30 !important;
+    color: #ffffff !important;
+    outline: none;
+}
+
+/* Fondo del formulario completo */
+body.dark-mode .solicitud-form-wrapper {
+    background-color: #0b3d26 !important;
+    border: 1px solid #245b3c !important;
+    box-shadow: none !important;
+}
+
+/* CORREGIR RECTÁNGULO BLANCO EN SOLICITUD */
+body.dark-mode .solicitud-hero > div,
+body.dark-mode .solicitud-hero .container,
+body.dark-mode .solicitud-hero .wrapper,
+body.dark-mode .solicitud-hero .card,
+body.dark-mode .solicitud-hero .btn,
+body.dark-mode .solicitud-hero button,
+body.dark-mode .solicitud-hero a,
+body.dark-mode .solicitud-bottom > div,
+body.dark-mode .solicitud-bottom .container,
+body.dark-mode .solicitud-bottom .wrapper,
+body.dark-mode .solicitud-bottom .card {
+    background-color: #0b3d26 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* Corregir elementos vacíos redondeados */
+body.dark-mode .solicitud-hero div:empty,
+body.dark-mode .solicitud-bottom div:empty {
+    background: #0b3d26 !important;
+    border-color: #245b3c !important;
+}
+
+/* Evitar que pseudo-elementos creen el rectángulo blanco */
+body.dark-mode .solicitud-hero::before,
+body.dark-mode .solicitud-hero::after,
+body.dark-mode .solicitud-bottom::before,
+body.dark-mode .solicitud-bottom::after {
+    background-color: transparent !important;
+}

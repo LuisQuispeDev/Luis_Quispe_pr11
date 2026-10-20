@@ -1,0 +1,23 @@
+{% extends "admin/_layout.html" %}
+{% block title %}Productos | APARC{% endblock %}
+{% block page %}
+<div class="page-head"><div><div class="eyebrow">Catálogo</div><h1>Productos</h1><p>Aquí se agregan y editan los productos que aparecen en la página pública.</p></div><a class="btn btn-primary" href="{{ url_for('admin.producto_nuevo') }}">＋ Nuevo producto</a></div>
+
+<section class="panel">
+<div class="panel-head"><div><h2>Catálogo actual</h2><p>Imagen, descripción, precio y unidad de venta.</p></div><span class="pill">{{ productos|length }} productos</span></div>
+{% if productos %}
+<div class="table-wrap"><table><thead><tr><th>Producto</th><th>Descripción</th><th>Precio</th><th>Unidad</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>
+{% for p in productos %}
+<tr>
+<td><div class="product-cell">{% if p.imagen %}<img class="product-thumb" src="{{ url_for('static', filename=p.imagen) }}" alt="{{ p.nombre }}">{% else %}<div class="product-thumb"></div>{% endif %}<div><strong>{{ p.nombre }}</strong><small>{{ p.categoria or 'Sin categoría' }}</small></div></div></td>
+<td style="max-width:300px">{{ p.descripcion|truncate(90) }}</td>
+<td><span class="price">S/ {{ '%.2f'|format(p.precio) }}</span></td>
+<td><span class="pill">{{ p.unidad }}</span></td>
+<td><span class="pill {% if not p.activo %}blue{% endif %}">{{ 'Publicado' if p.activo else 'Oculto' }}</span></td>
+<td><div class="actions"><a class="btn btn-light" href="{{ url_for('admin.producto_editar', producto_id=p.id) }}">Editar</a><form method="post" action="{{ url_for('admin.producto_eliminar', producto_id=p.id) }}" onsubmit="return confirm('¿Eliminar este producto?')"><button class="btn btn-danger">Eliminar</button></form></div></td>
+</tr>
+{% endfor %}
+</tbody></table></div>
+{% else %}<div class="empty">No hay productos. Pulsa “Nuevo producto” para crear el primero.</div>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,425 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inicio | APARC Renace Cañete
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO CON CARRUSEL DE FONDO (UVAS Y PRODUCTOS) -->
+<section class="inicio-hero relative min-h-[85vh] flex items-center overflow-hidden bg-renace-900 text-white py-20">
+
+    <!-- IMÁGENES DE FONDO DE UVAS (CARRUSEL AUTOMÁTICO) -->
+    <div class="hero-bg-carousel absolute inset-0 z-0">
+        <img
+            src="{{ url_for('static', filename='img/hero/hero-principal.jpg') }}"
+            alt="Uvas APARC Renace Cañete"
+            class="hero-bg-image active absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100 scale-105"
+        >
+        <img
+            src="{{ url_for('static', filename='img/productos/uva-italia.jpg') }}"
+            alt="Uva Italia Cañete"
+            class="hero-bg-image absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0 scale-105"
+        >
+        <img
+            src="{{ url_for('static', filename='img/productos/productos-hero.jpg') }}"
+            alt="Productos de uva Cañete"
+            class="hero-bg-image absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0 scale-105"
+        >
+    </div>
+
+    <!-- CAPA OSCURA TRANSPARENTE (OVERLAY) PARA DAR CONTRASTE AL TEXTO -->
+    <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-renace-900/70 to-black/50"></div>
+
+    <!-- CONTENIDO DEL HERO (SOBRE LAS IMÁGENES) -->
+    <div class="inicio-container relative z-20 max-w-6xl mx-auto px-6 w-full">
+
+        <p
+            class="inicio-label inline-block px-4 py-1.5 mb-4 rounded-full bg-cosecha-500/30 text-cosecha-100 font-bold text-sm tracking-wide border border-cosecha-500/50 backdrop-blur-md"
+            data-i18n="home.hero.label"
+            data-db-en="{{ contenido.etiqueta_en if contenido else 'Agricultural Producers Association' }}"
+            data-db-es="{{ contenido.etiqueta_es if contenido else 'Asociación de Productores Agrarios' }}"
+        >
+            Asociación de Productores Agrarios
+        </p>
+
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight drop-shadow-lg">
+            <span
+                class="text-white"
+                data-i18n="home.hero.title1"
+                data-db-en="{{ contenido.titulo1_en if contenido else 'UNITED FOR' }}"
+                data-db-es="{{ contenido.titulo1_es if contenido else 'UNIDOS POR' }}"
+            >
+                UNIDOS POR
+            </span>
+
+            <br>
+
+            <span
+                class="text-cosecha-500"
+                data-i18n="home.hero.title2"
+                data-db-en="{{ contenido.titulo2_en if contenido else 'A BETTER FUTURE.' }}"
+                data-db-es="{{ contenido.titulo2_es if contenido else 'UN FUTURO MEJOR.' }}"
+            >
+                UN FUTURO MEJOR.
+            </span>
+        </h1>
+
+        <p
+            class="inicio-description max-w-2xl text-lg md:text-xl text-gray-200 mb-8 leading-relaxed drop-shadow"
+            data-i18n="home.hero.description"
+            data-db-en="{{ contenido.descripcion_en if contenido else 'We are an association committed to agricultural development, responsible production, and the growth of our producers in Cañete.' }}"
+            data-db-es="{{ contenido.descripcion_es if contenido else 'Somos una asociación comprometida con el desarrollo agrícola, la producción responsable y el crecimiento de nuestros productores en Cañete.' }}"
+        >
+            Somos una asociación comprometida con el desarrollo agrícola, la producción responsable y el crecimiento de nuestros productores en Cañete.
+        </p>
+
+        <!-- BOTÓN PRINCIPAL -->
+        <a
+            href="{{ url_for('clientes.productos') }}"
+            class="inicio-button inline-flex items-center justify-center px-8 py-4 rounded-xl bg-cosecha-500 hover:bg-cosecha-600 text-white font-extrabold text-lg shadow-2xl hover:shadow-cosecha-500/50 transition-all duration-300 transform hover:-translate-y-1"
+            data-i18n="home.hero.button"
+            data-db-en="{{ contenido.boton_en if contenido else 'Discover our products' }}"
+            data-db-es="{{ contenido.boton_es if contenido else 'Conoce nuestros productos' }}"
+        >
+            Conoce nuestros productos
+        </a>
+
+    </div>
+
+</section>
+
+<!-- NUESTRA HISTORIA -->
+<section class="historia-section py-16 bg-white">
+
+    <div class="historia-container max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+
+        <div class="historia-content">
+
+            <p
+                class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-sm mb-2"
+                data-i18n="home.history.label"
+            >
+                Nuestra historia
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-renace-900 mb-4">
+                <span data-i18n="home.history.title1">
+                    Creciendo juntos
+                </span>
+                <br>
+                <span data-i18n="home.history.title2">
+                    desde Cañete.
+                </span>
+                <br>
+                <span data-i18n="home.history.title3">
+                    Nuestro compromiso.
+                </span>
+            </h2>
+
+            <div class="green-line w-20 h-1.5 bg-cosecha-500 rounded-full mb-6"></div>
+
+            <p class="text-gray-600 mb-4 leading-relaxed" data-i18n="home.history.text1">
+                La Asociación de Productores Agrarios Renace Cañete fue creada con el propósito de unir esfuerzos entre productores agrícolas, fortaleciendo la actividad del campo y generando nuevas oportunidades de desarrollo para sus miembros.
+            </p>
+
+            <p class="text-gray-600 leading-relaxed" data-i18n="home.history.text2">
+                Nuestro trabajo busca promover una producción organizada, responsable y enfocada en ofrecer productos de alta calidad al mercado.
+            </p>
+
+        </div>
+
+        <div class="historia-image rounded-2xl overflow-hidden shadow-xl border-4 border-renace-50">
+
+            <img
+                src="{{ url_for('static', filename='img/historia-cosecha.jpg') }}"
+                alt="Productores agrícolas cosechando uva"
+                class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                data-i18n-alt="home.history.imageAlt"
+                data-db-es="{{ contenido.imagen_historia_es if contenido else 'Cosecha agrícola en Cañete' }}"
+                data-db-en="{{ contenido.imagen_historia_en if contenido else 'Agricultural harvest in Cañete' }}"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- MISIÓN / VISIÓN / COMPROMISO -->
+<section class="guia-section py-16 bg-renace-50/50">
+
+    <div class="guia-container max-w-6xl mx-auto px-4 text-center">
+
+        <p
+            class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-sm mb-2"
+            data-i18n="home.guide.label"
+        >
+            Lo que nos guía
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-bold text-renace-900 mb-4" data-i18n="home.guide.title">
+            Explora nuestra página
+        </h2>
+
+        <p
+            class="guia-description max-w-2xl mx-auto text-gray-600 mb-12"
+            data-i18n="home.guide.description"
+        >
+            Trabajamos con compromiso, responsabilidad y una visión clara para el futuro de nuestra comunidad agrícola.
+        </p>
+
+        <div class="guia-cards grid md:grid-cols-3 gap-8 text-left">
+
+            <!-- MISIÓN -->
+            <article class="guia-card bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-renace-100">
+
+                <div class="card-icon w-12 h-12 rounded-xl bg-cosecha-500 text-white flex items-center justify-center font-black text-xl mb-6 shadow-md">
+                    M
+                </div>
+
+                <h3 class="text-xl font-bold text-renace-900 mb-3" data-i18n="home.mission.title">
+                    Misión
+                </h3>
+
+                <p class="text-gray-600 text-sm leading-relaxed" data-i18n="home.mission.text">
+                    Promover una producción agrícola responsable y fortalecer el desarrollo de nuestros productores.
+                </p>
+
+            </article>
+
+            <!-- VISIÓN -->
+            <article class="guia-card bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-renace-100">
+
+                <div class="card-icon w-12 h-12 rounded-xl bg-renace-700 text-white flex items-center justify-center font-black text-xl mb-6 shadow-md">
+                    V
+                </div>
+
+                <h3 class="text-xl font-bold text-renace-900 mb-3" data-i18n="home.vision.title">
+                    Visión
+                </h3>
+
+                <p class="text-gray-600 text-sm leading-relaxed" data-i18n="home.vision.text">
+                    Ser una asociación agrícola reconocida que genere oportunidades sostenibles para Cañete.
+                </p>
+
+            </article>
+
+            <!-- COMPROMISO -->
+            <article class="guia-card bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow border border-renace-100">
+
+                <div class="card-icon w-12 h-12 rounded-xl bg-cosecha-500 text-white flex items-center justify-center font-black text-xl mb-6 shadow-md">
+                    C
+                </div>
+
+                <h3 class="text-xl font-bold text-renace-900 mb-3" data-i18n="home.commitment.title">
+                    Compromiso
+                </h3>
+
+                <p class="text-gray-600 text-sm leading-relaxed" data-i18n="home.commitment.text">
+                    Trabajar junto a nuestros productores manteniendo calidad y responsabilidad en cada proceso.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- NUESTRO TRABAJO / CARRUSEL DE UVAS AUTOMÁTICO -->
+<section class="trabajo-section py-16 bg-white">
+
+    <div class="trabajo-container max-w-6xl mx-auto px-4 text-center">
+
+        <p
+            class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-sm mb-2"
+            data-i18n="home.work.label"
+        >
+            Nuestro trabajo
+        </p>
+
+        <h2 class="text-3xl md:text-4xl font-bold text-renace-900 mb-8" data-i18n="home.work.title">
+            Conoce nuestra producción de uva de alta calidad.
+        </h2>
+
+        <div class="trabajo-carousel relative max-w-4xl mx-auto overflow-hidden rounded-2xl shadow-2xl bg-black/10">
+
+            <button
+                type="button"
+                class="carousel-button carousel-prev absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/80 hover:bg-cosecha-500 hover:text-white text-renace-900 font-bold text-2xl flex items-center justify-center transition-all shadow-md"
+                id="carousel-prev"
+                aria-label="Previous image"
+                data-i18n-aria="home.carousel.prev"
+            >
+                ‹
+            </button>
+
+            <div class="carousel-track relative min-h-[350px] md:min-h-[450px]">
+
+                <img
+                    src="{{ url_for('static', filename='img/productos/uva-italia.jpg') }}"
+                    alt="Uva Italia APARC Renace Cañete"
+                    data-i18n-alt="home.carousel.image1"
+                    class="carousel-image active absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-100"
+                >
+
+                <img
+                    src="{{ url_for('static', filename='img/productos/pasas.jpg') }}"
+                    alt="Pasas de uva de Cañete"
+                    data-i18n-alt="home.carousel.image2"
+                    class="carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none"
+                >
+
+                <img
+                    src="{{ url_for('static', filename='img/productos/productos-hero.jpg') }}"
+                    alt="Productos derivados de la uva"
+                    data-i18n-alt="home.carousel.image3"
+                    class="carousel-image absolute inset-0 w-full h-full object-cover transition-opacity duration-700 opacity-0 pointer-events-none"
+                >
+
+            </div>
+
+            <button
+                type="button"
+                class="carousel-button carousel-next absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white/80 hover:bg-cosecha-500 hover:text-white text-renace-900 font-bold text-2xl flex items-center justify-center transition-all shadow-md"
+                id="carousel-next"
+                aria-label="Next image"
+                data-i18n-aria="home.carousel.next"
+            >
+                ›
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="inicio-footer bg-renace-900 text-white py-12">
+
+    <div class="footer-content max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 border-b border-renace-800 pb-8">
+
+        <div>
+
+            <h3 class="text-xl font-bold text-cosecha-500 mb-3">
+                APARC Renace Cañete
+            </h3>
+
+            <p class="text-gray-300 text-sm leading-relaxed max-w-sm" data-i18n="footer.description">
+                Asociación de Productores Agrarios comprometidos con el desarrollo agrícola de Cañete.
+            </p>
+
+        </div>
+
+        <div>
+
+            <h3 class="text-xl font-bold text-cosecha-500 mb-3" data-i18n="footer.contact">
+                Contacto
+            </h3>
+
+            <p class="text-gray-300 text-sm mb-1" data-i18n="footer.location">
+                Cañete, Lima, Perú
+            </p>
+
+            <p class="text-gray-300 text-sm" data-i18n="footer.association">
+                Asociación de Productores Agrarios
+            </p>
+
+        </div>
+
+    </div>
+
+    <div
+        class="footer-bottom max-w-6xl mx-auto px-4 pt-6 text-center text-xs text-gray-400"
+        data-i18n="footer.rights"
+    >
+        © 2026 APARC Renace Cañete. Todos los derechos reservados.
+    </div>
+
+</footer>
+
+<!-- SCRIPT DE MOVIMIENTO AUTOMÁTICO DE IMÁGENES -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Rotación del Hero
+        const heroImages = document.querySelectorAll(".hero-bg-image");
+        if (heroImages.length) {
+            let currentHeroIndex = 0;
+            setInterval(function () {
+                heroImages.forEach((img, i) => {
+                    if (i === currentHeroIndex) {
+                        img.classList.add("opacity-100");
+                        img.classList.remove("opacity-0");
+                    } else {
+                        img.classList.add("opacity-0");
+                        img.classList.remove("opacity-100");
+                    }
+                });
+                currentHeroIndex = (currentHeroIndex + 1) % heroImages.length;
+            }, 5000);
+        }
+
+        // Rotación del Carrusel de Trabajo/Productos
+        const workImages = document.querySelectorAll(".carousel-image");
+        const prevBtn = document.getElementById("carousel-prev");
+        const nextBtn = document.getElementById("carousel-next");
+        
+        if (workImages.length) {
+            let currentIndex = 0;
+            let autoplayInterval;
+
+            function showWorkImage(index) {
+                workImages.forEach((img, i) => {
+                    if (i === index) {
+                        img.classList.add("opacity-100", "active");
+                        img.classList.remove("opacity-0", "pointer-events-none");
+                    } else {
+                        img.classList.add("opacity-0", "pointer-events-none");
+                        img.classList.remove("opacity-100", "active");
+                    }
+                });
+            }
+
+            function nextImage() {
+                currentIndex = (currentIndex + 1) % workImages.length;
+                showWorkImage(currentIndex);
+            }
+
+            function prevImage() {
+                currentIndex = (currentIndex - 1 + workImages.length) % workImages.length;
+                showWorkImage(currentIndex);
+            }
+
+            function startAutoplay() {
+                autoplayInterval = setInterval(nextImage, 4000);
+            }
+
+            function stopAutoplay() {
+                clearInterval(autoplayInterval);
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener("click", function () {
+                    stopAutoplay();
+                    nextImage();
+                    startAutoplay();
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener("click", function () {
+                    stopAutoplay();
+                    prevImage();
+                    startAutoplay();
+                });
+            }
+
+            startAutoplay();
+        }
+    });
+</script>
+
+{% endblock %}

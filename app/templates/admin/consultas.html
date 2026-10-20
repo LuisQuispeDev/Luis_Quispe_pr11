@@ -1,0 +1,112 @@
+{% extends "admin/_layout.html" %}
+{% block title %}Consultas | APARC{% endblock %}
+
+{% block page %}
+
+<div class="page-head">
+
+  <div>
+
+    <div class="eyebrow">Bandeja de entrada</div>
+
+    <h1>Consultas</h1>
+
+    <p>Mensajes enviados desde el formulario de contacto.</p>
+
+  </div>
+
+  <span class="pill">{{ consultas|length }} registros</span>
+
+</div>
+
+<section class="panel">
+
+  <div class="panel-head">
+
+    <div>
+
+      <h2>Consultas recibidas</h2>
+
+      <p>Revisa los datos y el mensaje de cada contacto.</p>
+
+    </div>
+
+  </div>
+
+  {% if consultas %}
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Contacto</th>
+            <th>Empresa</th>
+            <th>Asunto</th>
+            <th>Correo / Teléfono</th>
+            <th>Fecha</th>
+            <th>Detalle</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {% for c in consultas %}
+
+            <tr>
+              <td><strong>{{ c.nombre or '-' }}</strong></td>
+
+              <td>{{ c.empresa or '-' }}</td>
+
+              <td><span class="pill blue">{{ c.asunto or 'Consulta general' }}</span></td>
+
+              <td>
+
+                {{ c.correo or '-' }}<br>
+
+                <small style="color:var(--gris)">{{ c.telefono or '' }}</small>
+
+              </td>
+
+              <td>{{ c.fecha_creacion.strftime('%d/%m/%Y %H:%M') if c.fecha_creacion else '-' }}</td>
+
+              <td>
+
+                <details>
+
+                  <summary>Ver mensaje</summary>
+
+                  <div class="detail">
+
+                    <strong>Mensaje:</strong><br>
+
+                    {{ c.mensaje or 'Sin mensaje' }}
+
+                  </div>
+
+                </details>
+
+              </td>
+
+            </tr>
+
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  {% else %}
+
+    <div class="empty">No hay consultas registradas.</div>
+
+  {% endif %}
+
+</section>
+
+{% endblock %}

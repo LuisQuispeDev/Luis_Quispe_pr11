@@ -1,0 +1,31 @@
+{% extends "admin/_layout.html" %}
+{% block title %}{{ 'Nuevo producto' if modo == 'nuevo' else 'Editar producto' }} | APARC{% endblock %}
+{% block page %}
+<div class="page-head"><div><div class="eyebrow">Catálogo / {{ 'Nuevo' if modo == 'nuevo' else 'Editar' }}</div><h1>{{ 'Agregar producto' if modo == 'nuevo' else 'Editar producto' }}</h1><p>La información guardada se mostrará automáticamente en “Productos” de la web.</p></div><a class="btn btn-light" href="{{ url_for('admin.productos') }}">← Volver</a></div>
+
+<form class="form-panel" method="post" enctype="multipart/form-data">
+<div class="form-grid">
+<div class="field"><label for="nombre">Nombre del producto *</label><input id="nombre" name="nombre" value="{{ producto.nombre if producto and producto.nombre is defined else '' }}" placeholder="Ej. Uva Italia" required></div>
+<div class="field"><label for="categoria">Categoría</label><input id="categoria" name="categoria" value="{{ producto.categoria if producto and producto.categoria is defined else '' }}" placeholder="Ej. Fruta fresca"></div>
+<div class="field full"><label for="descripcion">Descripción *</label><textarea id="descripcion" name="descripcion" placeholder="Describe brevemente el producto, calidad, origen, etc." required>{{ producto.descripcion if producto and producto.descripcion is defined else '' }}</textarea></div>
+<div class="field"><label for="precio">Precio (S/) *</label><input id="precio" name="precio" type="number" min="0" step="0.01" value="{{ producto.precio if producto and producto.precio is defined else '' }}" placeholder="0.00" required><div class="hint">Ejemplo: 8.50</div></div>
+<div class="field"><label for="unidad">¿Cómo se vende? *</label><select id="unidad" name="unidad" required>
+{% set u = producto.unidad if producto and producto.unidad is defined else 'kg' %}
+<option value="kg" {% if u=='kg' %}selected{% endif %}>Por kilogramo (kg)</option>
+<option value="g" {% if u=='g' %}selected{% endif %}>Por gramo (g)</option>
+<option value="unidad" {% if u=='unidad' %}selected{% endif %}>Por unidad</option>
+<option value="caja" {% if u=='caja' %}selected{% endif %}>Por caja</option>
+<option value="saco" {% if u=='saco' %}selected{% endif %}>Por saco</option>
+<option value="tonelada" {% if u=='tonelada' %}selected{% endif %}>Por tonelada</option>
+<option value="docena" {% if u=='docena' %}selected{% endif %}>Por docena</option>
+<option value="litro" {% if u=='litro' %}selected{% endif %}>Por litro</option>
+<option value="paquete" {% if u=='paquete' %}selected{% endif %}>Por paquete</option>
+<option value="otro" {% if u=='otro' %}selected{% endif %}>Otra presentación</option>
+</select></div>
+<div class="field full"><label for="imagen">Imagen del producto</label><input id="imagen" name="imagen" type="file" accept=".jpg,.jpeg,.png,.webp,.gif"><div class="hint">Máximo 5 MB. Formatos: JPG, PNG, WEBP o GIF.</div>
+{% if producto and producto.imagen %}<div class="image-preview"><img src="{{ url_for('static', filename=producto.imagen) }}" alt="{{ producto.nombre }}"><span class="hint">Si no seleccionas otra imagen, se conservará la actual.</span></div>{% endif %}</div>
+<div class="field full"><label class="check"><input type="checkbox" name="activo" {% if not producto or producto.activo is not defined or producto.activo %}checked{% endif %}> Publicar este producto en la web</label></div>
+</div>
+<div class="toolbar" style="margin-top:8px"><button class="btn btn-primary" type="submit">✓ Guardar producto</button><a class="btn btn-light" href="{{ url_for('admin.productos') }}">Cancelar</a></div>
+</form>
+{% endblock %}

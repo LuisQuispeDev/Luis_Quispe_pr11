@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar página Inicio | Renace Cañete</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 16px;
+            background: #f3f7f2;
+            color: #24352a;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
+        }
+
+        h1 {
+            color: #176b3a;
+            margin-top: 0;
+        }
+
+        .descripcion {
+            color: #647067;
+            line-height: 1.6;
+        }
+
+        .idiomas {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .idioma {
+            padding: 20px;
+            border: 1px solid #dce8dd;
+            border-radius: 12px;
+        }
+
+        h2 {
+            color: #176b3a;
+            font-size: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 7px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd8cd;
+            border-radius: 8px;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: 2px solid #8ac59a;
+            border-color: #176b3a;
+        }
+
+        .acciones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .guardar {
+            background: #176b3a;
+            color: white;
+        }
+
+        .volver {
+            background: #e8eee9;
+            color: #24352a;
+        }
+
+        .mensaje {
+            padding: 13px;
+            border-radius: 8px;
+            margin-bottom: 18px;
+        }
+
+        .success {
+            background: #e0f5e6;
+            color: #176b3a;
+        }
+
+        .error {
+            background: #fde8e7;
+            color: #a12828;
+        }
+
+        @media (max-width: 700px) {
+            .idiomas {
+                grid-template-columns: 1fr;
+            }
+
+            .contenedor {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="contenedor">
+
+        <h1>Editar página de Inicio</h1>
+
+        <p class="descripcion">
+            Modifica los textos en inglés y español.
+            Al guardar, los cambios se almacenarán en MySQL.
+        </p>
+
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% for categoria, mensaje in mensajes %}
+                <div class="mensaje {{ categoria }}">
+                    {{ mensaje }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <div class="idiomas">
+
+                <!-- INGLÉS -->
+                <section class="idioma">
+                    <h2>🇬🇧 English</h2>
+
+                    <label for="etiqueta_en">Etiqueta</label>
+                    <input
+                        id="etiqueta_en"
+                        name="etiqueta_en"
+                        maxlength="255"
+                        value="{{ contenido.etiqueta_en }}"
+                        required
+                    >
+
+                    <label for="titulo1_en">Título principal, línea 1</label>
+                    <input
+                        id="titulo1_en"
+                        name="titulo1_en"
+                        maxlength="255"
+                        value="{{ contenido.titulo1_en }}"
+                        required
+                    >
+
+                    <label for="titulo2_en">Título principal, línea 2</label>
+                    <input
+                        id="titulo2_en"
+                        name="titulo2_en"
+                        maxlength="255"
+                        value="{{ contenido.titulo2_en }}"
+                        required
+                    >
+
+                    <label for="descripcion_en">Descripción</label>
+                    <textarea
+                        id="descripcion_en"
+                        name="descripcion_en"
+                        required
+                    >{{ contenido.descripcion_en }}</textarea>
+
+                    <label for="boton_en">Texto del botón</label>
+                    <input
+                        id="boton_en"
+                        name="boton_en"
+                        maxlength="255"
+                        value="{{ contenido.boton_en }}"
+                        required
+                    >
+                </section>
+
+                <!-- ESPAÑOL -->
+                <section class="idioma">
+                    <h2>🇵🇪 Español</h2>
+
+                    <label for="etiqueta_es">Etiqueta</label>
+                    <input
+                        id="etiqueta_es"
+                        name="etiqueta_es"
+                        maxlength="255"
+                        value="{{ contenido.etiqueta_es }}"
+                        required
+                    >
+
+                    <label for="titulo1_es">Título principal, línea 1</label>
+                    <input
+                        id="titulo1_es"
+                        name="titulo1_es"
+                        maxlength="255"
+                        value="{{ contenido.titulo1_es }}"
+                        required
+                    >
+
+                    <label for="titulo2_es">Título principal, línea 2</label>
+                    <input
+                        id="titulo2_es"
+                        name="titulo2_es"
+                        maxlength="255"
+                        value="{{ contenido.titulo2_es }}"
+                        required
+                    >
+
+                    <label for="descripcion_es">Descripción</label>
+                    <textarea
+                        id="descripcion_es"
+                        name="descripcion_es"
+                        required
+                    >{{ contenido.descripcion_es }}</textarea>
+
+                    <label for="boton_es">Texto del botón</label>
+                    <input
+                        id="boton_es"
+                        name="boton_es"
+                        maxlength="255"
+                        value="{{ contenido.boton_es }}"
+                        required
+                    >
+                </section>
+
+            </div>
+
+            <div class="acciones">
+                <button type="submit" class="boton guardar">
+                    Guardar cambios
+                </button>
+
+                <a
+                    href="{{ url_for('admin.dashboard') }}"
+                    class="boton volver"
+                >
+                    Volver al panel
+                </a>
+            </div>
+
+        </form>
+
+    </main>
+</body>
+</html>

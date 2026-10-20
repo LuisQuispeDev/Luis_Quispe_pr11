@@ -1,0 +1,122 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Solicitudes | APARC{% endblock %}
+
+{% block page %}
+
+<div class="page-head">
+
+  <div>
+
+    <div class="eyebrow">Pedidos comerciales</div>
+
+    <h1>Solicitudes</h1>
+
+    <p>Consulta los pedidos enviados por empresas y asociaciones.</p>
+
+  </div>
+
+  <span class="pill">{{ solicitudes|length }} registros</span>
+
+</div>
+
+<section class="panel">
+
+  <div class="panel-head">
+
+    <div>
+
+      <h2>Solicitudes comerciales</h2>
+
+      <p>Producto, cantidad, empresa y fecha solicitada.</p>
+
+    </div>
+
+  </div>
+
+  {% if solicitudes %}
+
+    <div class="table-wrap">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>Empresa</th>
+            <th>Contacto</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Entrega</th>
+            <th>Fecha</th>
+            <th>Detalle</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          {% for s in solicitudes %}
+            <tr>
+
+              <td>
+                <strong>{{ s.empresa or '-' }}</strong><br>
+                <small style="color:var(--gris)">RUC: {{ s.ruc or '-' }}</small>
+              </td>
+
+              <td>
+                {{ s.contacto or '-' }}<br>
+                <small style="color:var(--gris)">{{ s.telefono or '' }}</small>
+              </td>
+
+              <td>
+                <strong>{{ s.producto_nombre or s.producto or '-' }}</strong>
+              </td>
+
+              <td>
+                <span class="pill">
+                  {{ s.cantidad if s.cantidad is not none else s.cantidad_kg }} {{ s.unidad or 'kg' }}
+                </span>
+              </td>
+
+              <td>{{ s.fecha.strftime('%d/%m/%Y') if s.fecha else '-' }}</td>
+
+              <td>{{ s.fecha_creacion.strftime('%d/%m/%Y %H:%M') if s.fecha_creacion else '-' }}</td>
+
+              <td>
+
+                <details>
+
+                  <summary>Ver</summary>
+
+                  <div class="detail">
+                    
+                    <strong>Correo:</strong> {{ s.correo or '-' }}<br>
+
+                    <strong>Mensaje:</strong> {{ s.mensaje or 'Sin detalles adicionales.' }}
+
+                  </div>
+
+                </details>
+
+              </td>
+
+            </tr>
+
+          {% endfor %}
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  {% else %}
+
+    <div class="empty">No hay solicitudes registradas.</div>
+
+  {% endif %}
+
+</section>
+
+{% endblock %}

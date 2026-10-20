@@ -1,0 +1,36 @@
+{% extends "admin/_layout.html" %}
+
+{% block title %}Dashboard | APARC{% endblock %}
+
+{% block page %}
+
+<div class="page-head"><div><div class="eyebrow">Resumen general</div><h1>Bienvenido al panel</h1><p>Administra el catálogo y revisa lo que llega desde la web.</p></div><a class="btn btn-primary" href="{{ url_for('admin.producto_nuevo') }}">＋ Agregar producto</a></div>
+
+<section class="stats">
+  <article class="stat"><div class="stat-top"><span>CONSULTAS</span><span class="stat-icon">✉</span></div><strong>{{ total_consultas }}</strong><span>Mensajes recibidos</span></article>
+  <article class="stat"><div class="stat-top"><span>SOLICITUDES</span><span class="stat-icon">📦</span></div><strong>{{ total_solicitudes }}</strong><span>Pedidos comerciales</span></article>
+  <article class="stat"><div class="stat-top"><span>PRODUCTOS</span><span class="stat-icon">🍇</span></div><strong>{{ total_productos }}</strong><span>Productos del catálogo</span></article>
+</section>
+
+<div class="grid-2">
+<section class="panel">
+  <div class="panel-head"><div><h2>Actividad reciente</h2><p>Últimas consultas y solicitudes.</p></div><a class="btn btn-light" href="{{ url_for('admin.consultas') }}">Ver consultas</a></div>
+  {% if actividad_reciente %}<div class="table-wrap"><table><thead><tr><th>Nombre / Empresa</th><th>Tipo</th><th>Fecha</th></tr></thead><tbody>
+  {% for r in actividad_reciente %}<tr><td><strong>{{ r.nombre or 'Sin nombre' }}</strong></td><td><span class="pill {% if r.tipo == 'Consulta' %}blue{% endif %}">{{ r.tipo }}</span></td><td>{{ r.fecha.strftime('%d/%m/%Y %H:%M') if r.fecha else '-' }}</td></tr>{% endfor %}
+  </tbody></table></div>{% else %}<div class="empty">Todavía no hay actividad registrada.</div>{% endif %}
+</section>
+
+<section class="panel">
+  <div class="panel-head"><div><h2>Catálogo</h2><p>Productos más recientes.</p></div><a class="btn btn-light" href="{{ url_for('admin.productos') }}">Gestionar</a></div>
+  {% if productos_destacados %}
+  <div style="padding:8px 18px">{% for p in productos_destacados %}
+    <div class="product-cell" style="padding:12px 0;border-bottom:1px solid var(--borde)">
+      {% if p.imagen %}<img class="product-thumb" src="{{ url_for('static', filename=p.imagen) }}" alt="{{ p.nombre }}">{% else %}<div class="product-thumb"></div>{% endif %}
+      <div style="flex:1"><strong>{{ p.nombre }}</strong><small>{{ p.unidad }} · <span class="price">S/ {{ '%.2f'|format(p.precio) }}</span></small></div>
+      <span class="pill">{{ 'Activo' if p.activo else 'Oculto' }}</span>
+    </div>
+  {% endfor %}</div>
+  {% else %}<div class="empty">Agrega tu primer producto.</div>{% endif %}
+</section>
+</div>
+{% endblock %}

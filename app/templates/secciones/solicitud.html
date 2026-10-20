@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block title %}Solicitud Comercial | APARC Renace Cañete{% endblock %}
+
+{% block content %}
+
+<!-- HERO DE SOLICITUD CON FONDO Y OVERLAY -->
+<section class="solicitud-hero relative min-h-[45vh] flex items-center overflow-hidden bg-renace-900 text-white py-20">
+
+    <div class="absolute inset-0 z-0">
+        <img
+            src="{{ url_for('static', filename='img/productos/productos-hero.jpg') }}"
+            alt="Solicitud APARC Renace Cañete"
+            class="w-full h-full object-cover opacity-30 scale-105"
+        >
+    </div>
+
+    <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-renace-900/70 to-black/50"></div>
+
+    <div class="solicitud-hero-content relative z-20 max-w-6xl mx-auto px-6 w-full text-center md:text-left">
+
+        <span 
+            class="section-label inline-block px-4 py-1.5 mb-4 rounded-full bg-cosecha-500/30 text-cosecha-100 font-bold text-sm tracking-wide border border-cosecha-500/50 backdrop-blur-md solicitud-animate"
+            data-i18n="request.hero.label"
+        >
+            SOLICITUD COMERCIAL
+        </span>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight drop-shadow-lg solicitud-animate solicitud-delay-1">
+            <span data-i18n="request.hero.title">Solicita nuestros <span class="text-cosecha-500">productos</span></span>
+        </h1>
+
+        <p 
+            class="max-w-2xl text-lg md:text-xl text-gray-200 leading-relaxed drop-shadow solicitud-animate solicitud-delay-2"
+            data-i18n="request.hero.description"
+        >
+            Realiza tu solicitud de productos agrícolas de APARC
+            para tu empresa o asociación.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- SECCIÓN PRINCIPAL: INFO Y FORMULARIO -->
+<section class="solicitud-section py-16 bg-white">
+
+    <div class="solicitud-container max-w-6xl mx-auto px-4 grid md:grid-cols-12 gap-12 items-start">
+
+        <!-- INFORMACIÓN Y BENEFICIOS (5 COLS) -->
+        <div class="solicitud-info md:col-span-5 space-y-8 solicitud-animate">
+
+            <div class="solicitud-heading">
+
+                <span 
+                    class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-sm mb-2 block" 
+                    data-i18n="request.info.label"
+                >
+                    PEDIDOS POR MAYOR
+                </span>
+
+                <h2 class="text-3xl md:text-4xl font-bold text-renace-900 mb-4 leading-snug" data-i18n="request.info.title">
+                    Solicitud de productos
+                </h2>
+
+                <div class="w-16 h-1.5 bg-cosecha-500 rounded-full mb-6"></div>
+
+                <p class="text-gray-600 leading-relaxed text-sm md:text-base mb-4" data-i18n="request.info.description1">
+                    En APARC trabajamos con empresas y asociaciones que buscan
+                    productos agrícolas de calidad provenientes de Cañete.
+                </p>
+
+                <p class="text-gray-600 leading-relaxed text-sm md:text-base" data-i18n="request.info.description2">
+                    Completa el formulario indicando el producto y la cantidad
+                    que necesitas. Nuestro equipo revisará tu solicitud
+                    y se pondrá en contacto contigo.
+                </p>
+
+            </div>
+
+
+            <div class="solicitud-beneficios space-y-4 mt-8">
+
+                <div class="beneficio-card bg-renace-50/60 p-5 rounded-2xl border border-renace-100 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="beneficio-icon w-12 h-12 rounded-xl bg-cosecha-500 text-white flex items-center justify-center font-bold text-xl flex-shrink-0 shadow">
+                        🍇
+                    </div>
+                    <div>
+                        <strong class="text-lg font-bold text-renace-900 block mb-1" data-i18n="request.benefit.products">
+                            Productos de Cañete
+                        </strong>
+                        <p class="text-gray-600 text-sm leading-relaxed" data-i18n="request.benefit.productsDescription">
+                            Producción agrícola de nuestra región.
+                        </p>
+                        
+                    </div>
+
+                </div>
+
+                <div class="beneficio-card bg-renace-50/60 p-5 rounded-2xl border border-renace-100 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="beneficio-icon w-12 h-12 rounded-xl bg-renace-700 text-white flex items-center justify-center font-bold text-xl flex-shrink-0 shadow">
+                        📦
+                    </div>
+                    <div>
+                        <strong class="text-lg font-bold text-renace-900 block mb-1" data-i18n="request.benefit.orders">
+                            Pedidos por volumen
+                        </strong>
+                        <p class="text-gray-600 text-sm leading-relaxed" data-i18n="request.benefit.ordersDescription">
+                            Indica la cantidad que necesita tu organización.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="beneficio-card bg-renace-50/60 p-5 rounded-2xl border border-renace-100 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="beneficio-icon w-12 h-12 rounded-xl bg-cosecha-500 text-white flex items-center justify-center font-bold text-xl flex-shrink-0 shadow">
+                        🤝
+                    </div>
+                    <div>
+                        <strong class="text-lg font-bold text-renace-900 block mb-1" data-i18n="request.benefit.attention">
+                            Atención comercial
+                        </strong>
+                        <p class="text-gray-600 text-sm leading-relaxed" data-i18n="request.benefit.attentionDescription">
+                            Coordinamos contigo los detalles de tu solicitud.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORMULARIO DE SOLICITUD (7 COLS) -->
+        <div class="solicitud-form-wrapper md:col-span-7 bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-renace-100 solicitud-animate solicitud-delay-1">
+
+            <div class="form-header mb-8">
+                <span class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-xs mb-1 block" data-i18n="request.form.label">
+                    FORMULARIO
+                </span>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-renace-900 mb-2" data-i18n="request.form.title">
+                    Realiza tu solicitud
+                </h2>
+                <p class="text-gray-600 text-sm" data-i18n="request.form.description">
+                    Completa tus datos para solicitar nuestros productos.
+                </p>
+
+            </div>
+
+            <form action="{{ url_for('clientes.solicitud') }}" method="POST" class="solicitud-form space-y-6">
+
+                <div class="form-row grid md:grid-cols-2 gap-6">
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="empresa" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="request.form.company">
+                            Empresa o asociación
+                        </label>
+
+                        <input
+                            type="text"
+                            id="empresa"
+                            name="empresa"
+                            placeholder="Nombre de la empresa o asociación"
+                            data-i18n-placeholder="request.form.companyPlaceholder"
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="ruc" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="request.form.ruc">
+                            RUC
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ruc"
+                            name="ruc"
+                            placeholder="Ej. 20123456789"
+                            data-i18n-placeholder="request.form.rucPlaceholder"
+                            maxlength="11"
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="form-row grid md:grid-cols-2 gap-6">
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="contacto" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="request.form.contact">
+                            Persona de contacto
+                        </label>
+
+                        <input
+                            type="text"
+                            id="contacto"
+                            name="contacto"
+                            placeholder="Nombre del responsable"
+                            data-i18n-placeholder="request.form.contactPlaceholder"
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="telefono" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="request.form.phone">
+                            Teléfono
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="telefono"
+                            name="telefono"
+                            placeholder="Número de contacto"
+                            data-i18n-placeholder="request.form.phonePlaceholder"
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5">
+                    <label for="correo" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="request.form.email">
+                        Correo electrónico
+                    </label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="correo@empresa.com"
+                        data-i18n-placeholder="request.form.emailPlaceholder"
+                        required
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                    >
+
+                </div>
+
+                <div class="form-row grid md:grid-cols-2 gap-6 bg-renace-50/50 p-4 rounded-xl border border-renace-100">
+                    <div class="form-group flex flex-col gap-1.5">
+                        
+                        <label for="producto_id">Producto</label>
+                        <select id="producto_id" name="producto_id" required>
+                            <option value="">Selecciona un producto</option>
+                            {% for producto in productos %}
+                            <option value="{{ producto.id }}">
+                                {{ producto.nombre }}
+                            </option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="cantidad">Cantidad</label>
+                        <input
+                            type="number"
+                            id="cantidad"
+                            name="cantidad"
+                            min="0.01"
+                            step="any"
+                            required
+                        >
+
+
+                    </div>
+
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5">
+                    <label for="fecha" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="request.form.date">
+                        Fecha aproximada de entrega
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fecha"
+                        name="fecha"
+                        required
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                    >
+
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5">
+                    <label for="mensaje" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="request.form.details">
+                        Detalles adicionales
+                    </label>
+
+                    <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        rows="4"
+                        placeholder="Escribe alguna especificación sobre tu solicitud (ej: variedad de calibre, tipo de empaque...)"
+                        data-i18n-placeholder="request.form.detailsPlaceholder"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm resize-none"
+                    ></textarea>
+
+                </div>
+
+                <button 
+                    type="submit" 
+                    class="solicitud-button w-full inline-flex items-center justify-center gap-2 py-4 px-8 rounded-xl bg-cosecha-500 hover:bg-cosecha-600 text-white font-extrabold text-base shadow-lg hover:shadow-cosecha-500/50 transition-all duration-300 transform hover:-translate-y-0.5"
+                >
+                    <span data-i18n="request.form.submit">Enviar solicitud</span>
+                    <span>→</span>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BLOQUE LLAMADA DE CIERRE -->
+<section class="solicitud-bottom bg-renace-900 text-white py-16">
+
+    <div class="solicitud-bottom-content max-w-4xl mx-auto px-6 text-center solicitud-animate">
+
+        <span 
+            class="section-label inline-block px-4 py-1.5 mb-4 rounded-full bg-cosecha-500/30 text-cosecha-100 font-bold text-sm tracking-wide border border-cosecha-500/50" 
+            data-i18n="request.bottom.label"
+        >
+            APARC RENACE CAÑETE
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight" data-i18n="request.bottom.title">
+            Trabajemos <span class="text-cosecha-500">juntos</span>
+        </h2>
+
+        <p class="text-gray-200 text-lg max-w-2xl mx-auto leading-relaxed" data-i18n="request.bottom.description">
+            Cuéntanos qué productos necesitas y coordinaremos contigo
+            los siguientes pasos. Estamos listos para llevar la mejor calidad a tu negocio.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- SCRIPT DE ACTUALIZACIÓN DE UNIDADES -->
+<script>
+    function actualizarUnidad(){
+        const selectElement = document.getElementById('producto');
+        const opcionSeleccionada = selectElement.options[selectElement.selectedIndex];
+        const labelUnidad = document.getElementById('unidad-label');
+        
+        if(opcionSeleccionada && opcionSeleccionada.value !== "") {
+            labelUnidad.textContent = opcionSeleccionada.dataset.unidad || 'unidad';
+        } else {
+            labelUnidad.textContent = 'unidad';
+        }
+    }
+    
+    // Ejecutar al cargar la página por si hay un producto seleccionado por URL (?producto=id)
+    document.addEventListener('DOMContentLoaded', actualizarUnidad);
+</script>
+
+{% endblock %}

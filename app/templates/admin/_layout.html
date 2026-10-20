@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html lang="es">
+
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>{% block title %}Panel | APARC Renace Cañete{% endblock %}</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+<body>
+
+<div class="admin-app">
+
+<aside class="sidebar">
+
+  <div class="brand"><strong>APARC RENACE CAÑETE</strong><span>PANEL DE ADMINISTRACIÓN</span></div>
+
+  <div class="nav-title">GESTIÓN</div>
+
+  <nav class="nav">
+
+    <a href="{{ url_for('admin.dashboard') }}" class="{% if request.endpoint == 'admin.dashboard' %}active{% endif %}"><span class="ico">▦</span>Dashboard</a>
+    <a href="{{ url_for('admin.productos') }}" class="{% if request.endpoint in ['admin.productos','admin.producto_nuevo','admin.producto_editar'] %}active{% endif %}"><span class="ico">🍇</span>Productos</a>
+    <a href="{{ url_for('admin.consultas') }}" class="{% if request.endpoint == 'admin.consultas' %}active{% endif %}"><span class="ico">✉</span>Consultas</a>
+    <a href="{{ url_for('admin.solicitudes') }}" class="{% if request.endpoint == 'admin.solicitudes' %}active{% endif %}"><span class="ico">📦</span>Solicitudes</a>
+
+  </nav>
+
+  <div class="logout"><form action="{{ url_for('admin.logout') }}" method="post"><button>↪ Cerrar sesión</button></form></div>
+
+</aside>
+
+<section class="main">
+
+<header class="topbar"><small>Administración · APARC Renace Cañete</small><div class="admin-user"><span>Administrador</span><div class="avatar">A</div></div></header>
+
+<main class="content">
+
+{% with messages=get_flashed_messages(with_categories=true) %}{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}
+
+{% if error_bd %}<div class="flash error">{{ error_bd }}</div>{% endif %}
+
+{% block page %}{% endblock %}
+
+</main>
+
+<div class="footer-note">Panel de gestión · APARC Renace Cañete · 2026</div>
+
+</section>
+
+</div>
+
+</body></html>

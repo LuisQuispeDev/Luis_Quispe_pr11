@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+
+{% block title %}Contacto | APARC Renace Cañete{% endblock %}
+
+{% block content %}
+
+<!-- HERO DE CONTACTO CON FONDO Y OVERLAY -->
+<section class="contacto-hero relative min-h-[45vh] flex items-center overflow-hidden bg-renace-900 text-white py-20">
+
+    <div class="absolute inset-0 z-0">
+        <img
+            src="{{ url_for('static', filename='img/contacto/contacto-hero.jpg') }}"
+            alt="Contacto APARC Renace Cañete"
+            class="w-full h-full object-cover opacity-30 scale-105"
+        >
+    </div>
+
+    <div class="absolute inset-0 z-10 bg-gradient-to-r from-black/80 via-renace-900/70 to-black/50"></div>
+
+    <div class="contacto-hero-content relative z-20 max-w-6xl mx-auto px-6 w-full text-center md:text-left">
+
+        <span 
+            class="contacto-label inline-block px-4 py-1.5 mb-4 rounded-full bg-cosecha-500/30 text-cosecha-100 font-bold text-sm tracking-wide border border-cosecha-500/50 backdrop-blur-md"
+            data-i18n="contact.hero.label"
+        >
+            Estamos para ayudarte
+        </span>
+
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 leading-tight drop-shadow-lg">
+            <span data-i18n="contact.hero.title1">Hablemos y</span>
+            <br>
+            <span class="text-cosecha-500" data-i18n="contact.hero.title2">hagamos crecer juntos.</span>
+        </h1>
+
+        <p 
+            class="max-w-2xl text-lg md:text-xl text-gray-200 leading-relaxed drop-shadow"
+            data-i18n="contact.hero.description"
+        >
+            Si deseas conocer nuestros productos, realizar una
+            consulta o establecer una relación comercial,
+            estamos listos para escucharte.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- SECCIÓN PRINCIPAL DE CONTACTO Y FORMULARIO -->
+<section class="contacto-section py-16 bg-white">
+
+    <div class="contacto-container max-w-6xl mx-auto px-4 grid md:grid-cols-12 gap-12 items-start">
+
+        <!-- INFORMACIÓN DE CONTACTO (4 COLS) -->
+        <div class="contacto-info md:col-span-5 space-y-8">
+
+            <div class="contacto-heading contacto-animate">
+
+                <span 
+                    class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-sm mb-2 block" 
+                    data-i18n="contact.info.label"
+                >
+                    Contáctanos
+                </span>
+
+                <h2 class="text-3xl md:text-4xl font-bold text-renace-900 mb-4 leading-snug">
+                    <span data-i18n="contact.info.title1">Estamos cerca</span>
+                    <br>
+                    <span class="text-cosecha-600" data-i18n="contact.info.title2">de ti.</span>
+                </h2>
+
+                <div class="w-16 h-1.5 bg-cosecha-500 rounded-full mb-6"></div>
+
+                <p 
+                    class="text-gray-600 leading-relaxed text-sm md:text-base"
+                    data-i18n="contact.info.description"
+                >
+                    Puedes comunicarte con APARC Renace Cañete
+                    para solicitar información sobre nuestros
+                    productos, realizar consultas o conversar
+                    sobre oportunidades comerciales.
+                </p>
+
+            </div>
+
+            <!-- TARJETA UBICACIÓN -->
+            <div class="contacto-card contacto-animate bg-renace-50/60 p-6 rounded-2xl border border-renace-100 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+
+                <div class="contacto-icon w-12 h-12 rounded-xl bg-cosecha-500 text-white flex items-center justify-center font-bold text-xl flex-shrink-0 shadow">
+                    📍
+                </div>
+
+                <div>
+                    <span class="text-xs font-bold text-cosecha-600 uppercase tracking-wider block mb-1" data-i18n="contact.location.label">
+                        Ubicación
+                    </span>
+
+                    <h3 class="text-lg font-bold text-renace-900" data-i18n="contact.location.title">
+                        Cañete, Lima
+                    </h3>
+
+                    <p class="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed" data-i18n="contact.location.description">
+                        Provincia de Cañete, región Lima, Perú.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- TARJETA CORREO -->
+            <div class="contacto-card contacto-animate contacto-delay-1 bg-renace-50/60 p-6 rounded-2xl border border-renace-100 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+
+                <div class="contacto-icon w-12 h-12 rounded-xl bg-renace-700 text-white flex items-center justify-center font-bold text-xl flex-shrink-0 shadow">
+                    ✉
+                </div>
+
+                <div>
+                    <span class="text-xs font-bold text-cosecha-600 uppercase tracking-wider block mb-1" data-i18n="contact.email.label">
+                        Correo electrónico
+                    </span>
+
+                    <h3 class="text-lg font-bold text-renace-900" data-i18n="contact.email.title">
+                        Escríbenos
+                    </h3>
+
+                    <p class="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed" data-i18n="contact.email.description">
+                        Estaremos atentos a tu consulta y solicitud.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- TARJETA ATENCIÓN -->
+            <div class="contacto-card contacto-animate contacto-delay-2 bg-renace-50/60 p-6 rounded-2xl border border-renace-100 flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+
+                <div class="contacto-icon w-12 h-12 rounded-xl bg-cosecha-500 text-white flex items-center justify-center font-bold text-xl flex-shrink-0 shadow">
+                    ⏱
+                </div>
+
+                <div>
+                    <span class="text-xs font-bold text-cosecha-600 uppercase tracking-wider block mb-1" data-i18n="contact.attention.label">
+                        Atención
+                    </span>
+
+                    <h3 class="text-lg font-bold text-renace-900" data-i18n="contact.attention.title">
+                        Atención comercial
+                    </h3>
+
+                    <p class="text-gray-600 text-xs md:text-sm mt-1 leading-relaxed" data-i18n="contact.attention.description">
+                        Consultas y solicitudes de empresas y asociaciones.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FORMULARIO DE CONTACTO (7 COLS) -->
+        <div class="contacto-form-wrapper md:col-span-7 bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-renace-100 contacto-animate contacto-delay-1">
+
+            <div class="contacto-form-header mb-8">
+
+                <span 
+                    class="section-label text-cosecha-600 font-bold uppercase tracking-wider text-xs mb-1 block" 
+                    data-i18n="contact.form.label"
+                >
+                    Escríbenos
+                </span>
+
+                <h2 class="text-2xl md:text-3xl font-extrabold text-renace-900 mb-2" data-i18n="contact.form.title">
+                    Envíanos un mensaje
+                </h2>
+
+                <p class="text-gray-600 text-sm" data-i18n="contact.form.description">
+                    Completa el formulario y nos pondremos en contacto contigo a la brevedad.
+                </p>
+
+            </div>
+
+            <form action="{{ url_for('clientes.contacto') }}" method="POST" class="contacto-form space-y-6">
+
+                <div class="form-row grid md:grid-cols-2 gap-6">
+
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="nombre" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="contact.form.name">
+                            Nombre
+                        </label>
+                        
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="Tu nombre"
+                            data-i18n-placeholder="contact.form.namePlaceholder"
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="empresa" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="contact.form.company">
+                            Empresa o asociación
+                        </label>
+
+                        <input
+                            type="text"
+                            id="empresa"
+                            name="empresa"
+                            placeholder="Nombre de la empresa o asociación"
+                            data-i18n-placeholder="contact.form.companyPlaceholder"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="form-row grid md:grid-cols-2 gap-6">
+
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="correo" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="contact.form.email">
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            type="email"
+                            id="correo"
+                            name="correo"
+                            placeholder="correo@ejemplo.com"
+                            data-i18n-placeholder="contact.form.emailPlaceholder"
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                    <div class="form-group flex flex-col gap-1.5">
+                        <label for="telefono" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="contact.form.phone">
+                            Teléfono
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="telefono"
+                            name="telefono"
+                            placeholder="999 999 999"
+                            data-i18n-placeholder="contact.form.phonePlaceholder"
+                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm"
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5">
+                    <label for="asunto" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="contact.form.subject">
+                        Asunto
+                    </label>
+                    <select 
+                        id="asunto" 
+                        name="asunto"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm bg-white"
+                    >
+                        <option value="" data-i18n="contact.form.subjectSelect">
+                            Selecciona una opción
+                        </option>
+
+                        <option value="productos" data-i18n="contact.form.subjectProducts">
+                            Información sobre productos
+                        </option>
+
+                        <option value="pedido" data-i18n="contact.form.subjectOrder">
+                            Solicitud de pedido
+                        </option>
+
+                        <option value="comercial" data-i18n="contact.form.subjectCommercial">
+                            Consulta comercial
+                        </option>
+
+                        <option value="otro" data-i18n="contact.form.subjectOther">
+                            Otro
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group flex flex-col gap-1.5">
+                    <label for="mensaje" class="text-xs font-bold text-renace-900 uppercase tracking-wider" data-i18n="contact.form.message">
+                        Mensaje
+                    </label>
+
+                    <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        rows="5"
+                        placeholder="Cuéntanos cómo podemos ayudarte..."
+                        data-i18n-placeholder="contact.form.messagePlaceholder"
+                        required
+                        class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-cosecha-500 focus:ring-2 focus:ring-cosecha-500/20 outline-none transition-all text-sm resize-none"
+                    ></textarea>
+
+                </div>
+
+                <button 
+                    type="submit" 
+                    class="contacto-submit w-full inline-flex items-center justify-center gap-2 py-4 px-8 rounded-xl bg-cosecha-500 hover:bg-cosecha-600 text-white font-extrabold text-base shadow-lg hover:shadow-cosecha-500/50 transition-all duration-300 transform hover:-translate-y-0.5"
+                >
+                    <span data-i18n="contact.form.submit">
+                        Enviar mensaje
+                    </span>
+
+                    <span>→</span>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- BLOQUE LLAMADA DE CIERRE -->
+<section class="contacto-cta bg-renace-900 text-white py-16">
+
+    <div class="contacto-cta-content max-w-4xl mx-auto px-6 text-center contacto-animate">
+
+        <span 
+            class="contacto-label inline-block px-4 py-1.5 mb-4 rounded-full bg-cosecha-500/30 text-cosecha-100 font-bold text-sm tracking-wide border border-cosecha-500/50" 
+            data-i18n="contact.cta.label"
+        >
+            APARC RENACE CAÑETE
+        </span>
+
+        <h2 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
+            <span data-i18n="contact.cta.title1">Construyamos nuevas</span>
+            <br>
+            <span class="text-cosecha-500" data-i18n="contact.cta.title2">oportunidades.</span>
+        </h2>
+
+        <p 
+            class="text-gray-200 text-lg max-w-2xl mx-auto leading-relaxed"
+            data-i18n="contact.cta.description"
+        >
+            Trabajamos junto a nuestros productores para
+            fortalecer nuestra agricultura y generar nuevas
+            oportunidades comerciales.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}

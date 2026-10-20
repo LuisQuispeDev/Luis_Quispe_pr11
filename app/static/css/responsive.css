@@ -1,0 +1,533 @@
+/* Tablet */
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .main-menu {
+        gap: 15px;
+    }
+
+    .historia-container,
+    .valores-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .historia-image img {
+        height: 260px;
+    }
+
+    .valores-image {
+        order: -1;
+    }
+
+    .valores-image img {
+        height: 250px;
+    }
+
+    .guia-cards {
+        gap: 15px;
+    }
+
+}
+
+/* Movil */
+@media (max-width: 700px) {
+
+    /* NAVBAR */
+
+    .navbar {
+        min-height: 64px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-menu {
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        padding: 12px 20px 18px;
+
+        background: #ffffff;
+
+        border-top: 1px solid #eeeeee;
+
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .main-menu.active {
+        display: flex;
+    }
+
+    .main-menu a {
+        padding: 11px 5px;
+    }
+
+    .main-menu a:last-child {
+        text-align: center;
+        margin-top: 5px;
+    }
+
+
+    /* HERO */
+
+    .inicio-hero {
+        min-height: 370px;
+    }
+
+    .inicio-container {
+        padding: 45px 24px;
+    }
+
+    .inicio-container h1 {
+        font-size: clamp(2.35rem, 12vw, 3.5rem);
+    }
+
+    .inicio-description {
+        font-size: 0.78rem;
+        max-width: 100%;
+    }
+
+
+    /* HISTORIA */
+
+    .historia-section {
+        padding: 42px 24px;
+    }
+
+    .historia-content h2 {
+        font-size: 2.25rem;
+    }
+
+    .historia-image img {
+        height: 220px;
+    }
+
+
+    /* GUÍA */
+
+    .guia-section {
+        padding: 42px 24px;
+    }
+
+    .guia-container > h2 {
+        font-size: 2.3rem;
+    }
+
+    .guia-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .guia-card {
+        min-height: auto;
+    }
+
+
+    /* VALORES */
+
+    .valores-section {
+        padding: 42px 24px;
+    }
+
+    .valores-content h2 {
+        font-size: 2.3rem;
+    }
+
+    .valores-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* TRABAJO */
+
+    .trabajo-section {
+        padding: 42px 24px;
+    }
+
+    .trabajo-container h2 {
+        font-size: 2.25rem;
+    }
+
+    .trabajo-carousel {
+        width: 100%;
+        height: 240px;
+        border-radius: 20px;
+    }
+
+
+    /* FOOTER */
+
+    .footer-content {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .footer-bottom {
+        margin-top: 35px;
+    }
+}
+
+/* =========================================
+   NOSOTROS - TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+    .nosotros-hero {
+        min-height: 380px;
+    }
+
+    .quienes-container {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+    }
+
+    .quienes-image img {
+        height: 380px;
+    }
+
+    .proposito-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .trabajo-nosotros-container {
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+}
+
+
+/* =========================================
+   NOSOTROS - CELULAR
+========================================= */
+
+@media (max-width: 700px) {
+
+    .nosotros-hero {
+        min-height: 420px;
+    }
+
+    .nosotros-container {
+        padding: 70px 24px;
+    }
+
+    .nosotros-container h1 {
+        font-size: 3.2rem;
+    }
+
+    .nosotros-container > p:last-child {
+        font-size: 0.95rem;
+    }
+
+
+    .quienes-section {
+        padding: 75px 24px;
+    }
+
+    .quienes-image::before {
+        left: -12px;
+        bottom: -12px;
+    }
+
+    .quienes-image img {
+        height: 300px;
+
+        border-radius: 22px;
+    }
+
+    .quienes-content h2 {
+        font-size: 2.5rem;
+    }
+
+
+    .proposito-section {
+        padding: 75px 24px;
+    }
+
+    .proposito-heading {
+        margin-bottom: 35px;
+    }
+
+    .proposito-heading h2 {
+        font-size: 2.5rem;
+    }
+
+    .proposito-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .proposito-card {
+        min-height: 230px;
+
+        padding: 28px;
+    }
+
+
+    .trabajo-nosotros-section {
+        padding: 75px 24px;
+    }
+
+    .trabajo-nosotros-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .trabajo-nosotros-image img {
+        height: 300px;
+    }
+
+}
+
+/* =========================================
+   PRODUCTOS RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .productos-hero {
+        min-height: 460px;
+    }
+
+    .productos-intro-container {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .productos-grid {
+        grid-template-columns: 1fr;
+
+        max-width: 700px;
+
+        margin: auto;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .productos-hero {
+        min-height: 520px;
+    }
+
+    .productos-hero-content {
+        padding: 80px 22px;
+    }
+
+    .productos-hero h1 {
+        font-size: 3rem;
+    }
+
+    .productos-hero p {
+        font-size: 0.98rem;
+    }
+
+
+    .productos-intro {
+        padding: 75px 22px 50px;
+    }
+
+
+    .productos-intro-title h2 {
+        font-size: 2.7rem;
+    }
+
+
+    .productos-section {
+        padding: 65px 22px 85px;
+    }
+
+
+    .productos-heading {
+        margin-bottom: 45px;
+    }
+
+
+    .productos-heading h2 {
+        font-size: 2.7rem;
+    }
+
+
+    .producto-image {
+        height: 300px;
+    }
+
+
+    .producto-content {
+        padding: 27px 23px;
+    }
+
+
+    .producto-content h3 {
+        font-size: 1.9rem;
+    }
+
+
+    .producto-content > p {
+        min-height: auto;
+    }
+
+
+    .producto-info {
+        gap: 10px;
+    }
+
+
+    .productos-cta {
+        padding: 85px 22px;
+    }
+
+}
+
+/* =========================================
+   CONTACTO RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .contacto-container {
+        grid-template-columns: 1fr;
+
+        gap: 55px;
+    }
+
+    .contacto-info {
+        max-width: 750px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .contacto-hero {
+        min-height: 500px;
+    }
+
+
+    .contacto-hero-content {
+        padding: 80px 22px;
+    }
+
+
+    .contacto-hero h1 {
+        font-size: 3rem;
+    }
+
+
+    .contacto-section {
+        padding: 70px 22px 85px;
+    }
+
+
+    .contacto-heading h2 {
+        font-size: 2.8rem;
+    }
+
+
+    .contacto-form-wrapper {
+        padding: 28px 22px;
+
+        border-radius: 24px;
+    }
+
+
+    .contacto-form-header h2 {
+        font-size: 2rem;
+    }
+
+
+    .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .contacto-card {
+        padding: 19px;
+    }
+
+
+    .contacto-cta {
+        padding: 85px 22px;
+    }
+
+}
+
+/* =========================================
+   SOLICITUD RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .solicitud-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        max-width: 700px;
+    }
+
+    .solicitud-info h2 {
+        font-size: 2.4rem;
+    }
+
+    .solicitud-form-wrapper {
+        padding: 30px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .solicitud-hero {
+        min-height: 380px;
+    }
+
+    .solicitud-hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .solicitud-hero-content p {
+        font-size: 0.95rem;
+    }
+
+    .solicitud-section {
+        padding: 65px 15px;
+    }
+
+    .solicitud-info h2 {
+        font-size: 2rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .solicitud-form-wrapper {
+        padding: 22px;
+        border-radius: 20px;
+    }
+
+    .solicitud-bottom {
+        padding: 65px 20px;
+    }
+
+    .solicitud-bottom-content h2 {
+        font-size: 2.2rem;
+    }
+
+}

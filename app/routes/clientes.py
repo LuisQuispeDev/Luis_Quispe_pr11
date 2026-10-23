@@ -9,12 +9,56 @@ from app.database import obtener_conexion
 clientes_bp = Blueprint("clientes", __name__)
 
 
-# Productos disponibles para los formularios
-PRODUCTOS = [
-    {"id": 1, "nombre": "Uva Italia", "unidad": "kg"},
-    {"id": 2, "nombre": "Uva Red Globe", "unidad": "kg"},
-    {"id": 3, "nombre": "Uva Crimson", "unidad": "kg"},
-]
+def obtener_productos(activos=True):
+    """
+    Consulta los productos de MySQL.
+    Las imágenes deben guardarse en la carpeta static del proyecto.
+    """
+    conexion = None
+    cursor = None
+
+    try:
+        conexion = obtener_conexion()
+        cursor = conexion.cursor(dictionary=True)
+
+        if activos:
+            cursor.execute("""
+                SELECT id, nombre, descripcion, categoria,
+                       precio, unidad, imagen, activo
+                FROM productos
+                WHERE activo = 1
+                ORDER BY id DESC
+            """)
+        else:
+            cursor.execute("""
+                SELECT id, nombre, descripcion, categoria,
+                       precio, unidad, imagen, activo
+                FROM productos
+                ORDER BY id DESC
+            """)
+
+        return cursor.fetchall()
+
+    except Exception:
+        current_app.logger.exception(
+            "Error al consultar los productos en MySQL."
+        )
+        return []
+
+    finally:
+        if cursor:
+            cursor.close()
+        if conexion:
+            conexion.close()
+
+
+def renderizar_solicitud(**datos):
+    """Carga el formulario con los productos actuales de MySQL."""
+    return render_template(
+        "secciones/solicitud.html",
+        productos=obtener_productos(),
+        **datos
+    )
 
 
 @clientes_bp.route("/")
@@ -32,13 +76,18 @@ def nosotros():
 
 @clientes_bp.route("/productos")
 def productos():
+    lista_productos = obtener_productos()
+
     return render_template(
         "secciones/productos.html",
-        productos=PRODUCTOS
+        productos=lista_productos
     )
 
 
-# CONTACTO: guardar datos en la tabla Consultas
+# =========================================================
+# CONTACTO: registrar consultas en MySQL
+# =========================================================
+
 @clientes_bp.route("/contacto", methods=["GET", "POST"])
 def contacto():
 
@@ -111,15 +160,15 @@ def contacto():
             conexion.close()
 
 
-# SOLICITUD: guardar datos en la tabla Solicitudes
+# =========================================================
+# SOLICITUD: registrar pedidos comerciales en MySQL
+# =========================================================
+
 @clientes_bp.route("/solicitud", methods=["GET", "POST"])
 def solicitud():
 
     if request.method == "GET":
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS
-        )
+        return renderizar_solicitud()
 
     empresa = request.form.get("empresa", "").strip()
     ruc = request.form.get("ruc", "").strip()
@@ -141,65 +190,62 @@ def solicitud():
         cantidad_texto,
         fecha_texto
     ]):
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS,
-            error="Completa todos los campos obligatorios, incluida la fecha de entrega."
+        return renderizar_solicitud(
+            error=(
+                "Completa todos los campos obligatorios, "
+                "incluida la fecha de entrega."
+            )
         ), 400
 
-    # Validar RUC: debe contener 11 dígitos
     if not ruc.isdigit() or len(ruc) != 11:
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS,
+        return renderizar_solicitud(
             error="El RUC debe contener exactamente 11 dígitos."
         ), 400
 
-    # Validar producto y cantidad
     try:
         producto_id = int(producto_id_texto)
         cantidad = Decimal(cantidad_texto.replace(",", "."))
 
-        if producto_id <= 0 or not cantidad.is_finite() or cantidad <= 0:
+        if (
+            producto_id <= 0
+            or not cantidad.is_finite()
+            or cantidad <= 0
+        ):
             raise ValueError
 
     except (ValueError, InvalidOperation):
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS,
+        return renderizar_solicitud(
             error="Selecciona un producto y una cantidad válida."
         ), 400
 
-    # Validar fecha
     try:
         fecha = date.fromisoformat(fecha_texto)
 
     except ValueError:
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS,
+        return renderizar_solicitud(
             error="La fecha de entrega no es válida."
         ), 400
 
-    # Buscar el producto seleccionado
-    producto = next(
-        (p for p in PRODUCTOS if p["id"] == producto_id),
-        None
-    )
-
-    if not producto:
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS,
-            error="El producto seleccionado no está disponible."
-        ), 400
-
+    # Comprobar que el producto realmente existe en MySQL.
     conexion = None
     cursor = None
 
     try:
         conexion = obtener_conexion()
-        cursor = conexion.cursor()
+        cursor = conexion.cursor(dictionary=True)
+
+        cursor.execute("""
+            SELECT id, nombre
+            FROM productos
+            WHERE id = %s AND activo = 1
+        """, (producto_id,))
+
+        producto = cursor.fetchone()
+
+        if not producto:
+            return renderizar_solicitud(
+                error="El producto seleccionado no está disponible."
+            ), 400
 
         cursor.execute("""
             INSERT INTO Solicitudes (
@@ -230,11 +276,7 @@ def solicitud():
 
         conexion.commit()
 
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS,
-            enviada=True
-        )
+        return renderizar_solicitud(enviada=True)
 
     except Exception:
         if conexion:
@@ -244,10 +286,11 @@ def solicitud():
             "Error al registrar la solicitud en MySQL."
         )
 
-        return render_template(
-            "secciones/solicitud.html",
-            productos=PRODUCTOS,
-            error="No se pudo guardar la solicitud. Revisa la terminal."
+        return renderizar_solicitud(
+            error=(
+                "No se pudo guardar la solicitud. "
+                "Revisa la terminal para conocer el error de MySQL."
+            )
         ), 500
 
     finally:
